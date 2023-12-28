@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:madcamp_week1/contact_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          Text('Tab 1'),
+          ContactScreen(),
           Text('Tab 2'),
           Text('Tab 3'),
         ],
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.question_mark),
           ),
         ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
