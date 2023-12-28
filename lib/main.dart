@@ -41,7 +41,14 @@ class _MyHomePageState extends State<MyHomePage> {
         index: _currentIndex,
         children: [
           Text('Tab 1'),
-          Text('Tab 2'),
+          GridView.count(
+              scrollDirection: Axis.vertical,
+              crossAxisCount: 3,
+              children: createBox(20),
+              mainAxisSpacing: 5.0,
+              crossAxisSpacing: 5.0,
+              padding: const EdgeInsets.all(5.0)
+          ),
           Text('Tab 3'),
         ],
       ),
@@ -69,4 +76,48 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  List<Widget> createBox(int boxNum){
+    List<Widget> images = [];
+    List<String> urls = [];
+    urls.add('images/1.jpeg');
+    urls.add('images/2.jpeg');
+    urls.add('images/3.jpeg');
+    urls.add('images/4.jpeg');
+    urls.add('images/5.jpeg');
+    urls.add('images/6.jpeg');
+    urls.add('images/7.jpeg');
+    urls.add('images/8.jpeg');
+    urls.add('images/9.jpeg');
+    urls.add('images/10.jpeg');
+    urls.add('images/11.jpeg');
+    urls.add('images/12.jpeg');
+    urls.add('images/13.jpeg');
+    urls.add('images/14.jpeg');
+    urls.add('images/15.jpeg');
+    urls.add('images/16.jpeg');
+    urls.add('images/17.jpeg');
+    urls.add('images/18.jpeg');
+    urls.add('images/19.jpeg');
+    urls.add('images/20.jpeg');
+
+    Widget image;
+    int i=0;
+    while(i < boxNum){
+      image = Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image:AssetImage(urls[i])
+            )
+          )
+      );
+      images.add(image);
+      i++;
+    }
+    return images;
+  }
 }
+
+
+
