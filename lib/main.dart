@@ -28,8 +28,9 @@ class MyApp extends StatelessWidget {
     );
 
     return base.copyWith(
-      appBarTheme: base.appBarTheme
-          .copyWith(backgroundColor: base.colorScheme.inversePrimary),
+      appBarTheme: base.appBarTheme.copyWith(
+        backgroundColor: base.colorScheme.inversePrimary,
+      ),
       textTheme: GoogleFonts.ibmPlexSansKrTextTheme(base.textTheme),
     );
   }
@@ -47,16 +48,13 @@ class MyHomePage extends StatelessWidget {
       builder: (context, snapshot) {
         final currentIndex = snapshot.hasData ? snapshot.data! : 0;
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text('Week 1'),
-          ),
+          appBar: AppBar(title: const Text('Week 1')),
           body: IndexedStack(
             index: currentIndex,
-            children: [
-              const ContactScreen(),
+            children: const [
+              ContactScreen(),
               GalleryScreen(),
-              const Text('Tab 3'),
+              Text('Tab 3'),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -64,16 +62,16 @@ class MyHomePage extends StatelessWidget {
             onTap: _currentIndexCtrl.add,
             items: const [
               BottomNavigationBarItem(
-                label: '탭 1',
+                label: 'Contact',
                 icon: Icon(Icons.person),
               ),
               BottomNavigationBarItem(
-                label: '탭 2',
+                label: 'Gallery',
                 icon: Icon(Icons.image),
               ),
               BottomNavigationBarItem(
-                label: '탭 3',
-                icon: Icon(Icons.question_mark),
+                label: 'Game',
+                icon: Icon(Icons.videogame_asset),
               ),
             ],
           ),
