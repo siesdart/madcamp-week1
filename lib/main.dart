@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:madcamp_week1/contact_screen.dart';
+import 'package:madcamp_week1/gallery_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,14 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         index: _currentIndex,
         children: [
           const ContactScreen(),
-          GridView.count(
-            scrollDirection: Axis.vertical,
-            crossAxisCount: 3,
-            children: createBox(20),
-            mainAxisSpacing: 5.0,
-            crossAxisSpacing: 5.0,
-            padding: const EdgeInsets.all(5.0),
-          ),
+          GalleryScreen(),
           const Text('Tab 3'),
         ],
       ),
@@ -62,56 +56,21 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         items: const [
           BottomNavigationBarItem(
-            label: '탭 1',
+            label: 'Contact',
             icon: Icon(Icons.call),
           ),
           BottomNavigationBarItem(
-            label: '탭 2',
+            label: 'Gallery',
             icon: Icon(Icons.image),
           ),
           BottomNavigationBarItem(
-            label: '탭 3',
-            icon: Icon(Icons.question_mark),
+            label: 'Arithmetic Games',
+            icon: Icon(Icons.videogame_asset_rounded),
           ),
         ],
       ),
     );
   }
 
-  List<Widget> createBox(int boxNum) {
-    List<Widget> images = [];
-    List<String> urls = [];
-    urls.add('images/1.jpeg');
-    urls.add('images/2.jpeg');
-    urls.add('images/3.jpeg');
-    urls.add('images/4.jpeg');
-    urls.add('images/5.jpeg');
-    urls.add('images/6.jpeg');
-    urls.add('images/7.jpeg');
-    urls.add('images/8.jpeg');
-    urls.add('images/9.jpeg');
-    urls.add('images/10.jpeg');
-    urls.add('images/11.jpeg');
-    urls.add('images/12.jpeg');
-    urls.add('images/13.jpeg');
-    urls.add('images/14.jpeg');
-    urls.add('images/15.jpeg');
-    urls.add('images/16.jpeg');
-    urls.add('images/17.jpeg');
-    urls.add('images/18.jpeg');
-    urls.add('images/19.jpeg');
-    urls.add('images/20.jpeg');
 
-    Widget image;
-    int i = 0;
-    while (i < boxNum) {
-      image = Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage(urls[i]))));
-      images.add(image);
-      i++;
-    }
-    return images;
-  }
 }
