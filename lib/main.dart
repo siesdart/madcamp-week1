@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:madcamp_week1/contact_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:madcamp_week1/screens/contact_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,106 +15,87 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Week 1',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(),
+      theme: _buildThemeData(),
+      home: MyHomePage(),
+    );
+  }
+
+  ThemeData _buildThemeData() {
+    final base = ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    );
+
+    return base.copyWith(
+      appBarTheme: base.appBarTheme
+          .copyWith(backgroundColor: base.colorScheme.inversePrimary),
+      textTheme: GoogleFonts.ibmPlexSansKrTextTheme(base.textTheme),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class MyHomePage extends StatelessWidget {
+  final _currentIndexCtrl = StreamController<int>();
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
+  MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Week 1'),
-      ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: [
-          const ContactScreen(),
-          GridView.count(
-            scrollDirection: Axis.vertical,
-            crossAxisCount: 3,
-            children: createBox(20),
-            mainAxisSpacing: 5.0,
-            crossAxisSpacing: 5.0,
-            padding: const EdgeInsets.all(5.0),
+    return StreamBuilder<int>(
+      stream: _currentIndexCtrl.stream,
+      builder: (context, snapshot) {
+        final currentIndex = snapshot.hasData ? snapshot.data! : 0;
+
+        return Scaffold(
+          appBar: AppBar(title: const Text('Week 1')),
+          body: IndexedStack(
+            index: currentIndex,
+            children: [
+              const ContactScreen(),
+              GridView.count(
+                crossAxisCount: 3,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                padding: const EdgeInsets.all(4),
+                children: createBox(20),
+              ),
+              const Text('Tab 3'),
+            ],
           ),
-          const Text('Tab 3'),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (value) {
-          setState(() {
-            _currentIndex = value;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            label: '탭 1',
-            icon: Icon(Icons.call),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: _currentIndexCtrl.add,
+            items: const [
+              BottomNavigationBarItem(
+                label: '탭 1',
+                icon: Icon(Icons.person),
+              ),
+              BottomNavigationBarItem(
+                label: '탭 2',
+                icon: Icon(Icons.image),
+              ),
+              BottomNavigationBarItem(
+                label: '탭 3',
+                icon: Icon(Icons.question_mark),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            label: '탭 2',
-            icon: Icon(Icons.image),
-          ),
-          BottomNavigationBarItem(
-            label: '탭 3',
-            icon: Icon(Icons.question_mark),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   List<Widget> createBox(int boxNum) {
-    List<Widget> images = [];
-    List<String> urls = [];
-    urls.add('images/1.jpeg');
-    urls.add('images/2.jpeg');
-    urls.add('images/3.jpeg');
-    urls.add('images/4.jpeg');
-    urls.add('images/5.jpeg');
-    urls.add('images/6.jpeg');
-    urls.add('images/7.jpeg');
-    urls.add('images/8.jpeg');
-    urls.add('images/9.jpeg');
-    urls.add('images/10.jpeg');
-    urls.add('images/11.jpeg');
-    urls.add('images/12.jpeg');
-    urls.add('images/13.jpeg');
-    urls.add('images/14.jpeg');
-    urls.add('images/15.jpeg');
-    urls.add('images/16.jpeg');
-    urls.add('images/17.jpeg');
-    urls.add('images/18.jpeg');
-    urls.add('images/19.jpeg');
-    urls.add('images/20.jpeg');
-
-    Widget image;
-    int i = 0;
-    while (i < boxNum) {
-      image = Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage(urls[i]))));
-      images.add(image);
-      i++;
-    }
-    return images;
+    return List.generate(
+      boxNum,
+      (i) => Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('images/${i + 1}.jpeg'),
+          ),
+        ),
+      ),
+    );
   }
 }
