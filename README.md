@@ -16,5 +16,5 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## Members
-+ [Seonhui Kim](github.com/sunnygeem)
-+ [Hyunwoo Park](github.com/siesdart)
++ [Seonhui Kim](https://github.com/sunnygeem)
++ [Hyunwoo Park](https://github.com/siesdart)
