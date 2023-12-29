@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madcamp_week1/screens/contact_screen.dart';
+import 'package:madcamp_week1/screens/gallery_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,20 +46,16 @@ class MyHomePage extends StatelessWidget {
       stream: _currentIndexCtrl.stream,
       builder: (context, snapshot) {
         final currentIndex = snapshot.hasData ? snapshot.data! : 0;
-
         return Scaffold(
-          appBar: AppBar(title: const Text('Week 1')),
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: const Text('Week 1'),
+          ),
           body: IndexedStack(
             index: currentIndex,
             children: [
               const ContactScreen(),
-              GridView.count(
-                crossAxisCount: 3,
-                mainAxisSpacing: 4,
-                crossAxisSpacing: 4,
-                padding: const EdgeInsets.all(4),
-                children: createBox(20),
-              ),
+              GalleryScreen(),
               const Text('Tab 3'),
             ],
           ),
@@ -82,20 +79,6 @@ class MyHomePage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  List<Widget> createBox(int boxNum) {
-    return List.generate(
-      boxNum,
-      (i) => Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('images/${i + 1}.jpeg'),
-          ),
-        ),
-      ),
     );
   }
 }
