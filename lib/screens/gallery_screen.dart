@@ -9,7 +9,7 @@ class GalleryScreen extends StatefulWidget {
 }
 
 class _GalleryScreenState extends State<GalleryScreen> {
-  List<String> likedImages = [];
+  List<int> likedImages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +48,10 @@ class _GalleryScreenState extends State<GalleryScreen> {
               crossAxisCount: 3,
               mainAxisSpacing: 4,
               crossAxisSpacing: 4,
-              children: likedImages.map(_buildImage).toList(),
+              children: likedImages.map(_buildImageButton).toList(),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildImage(String url) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage(url),
-        ),
       ),
     );
   }
@@ -85,15 +74,15 @@ class _GalleryScreenState extends State<GalleryScreen> {
   }
 
   Future<void> _onImageButtonPressed(int imageIndex) async {
-    final url = await Navigator.push<String>(
+    final index = await Navigator.push<int>(
       context,
       MaterialPageRoute(
         builder: (context) => GalleryDetailScreen(imageIndex: imageIndex),
       ),
     );
 
-    if (url != null) {
-      setState(() => likedImages.add(url));
+    if (index != null) {
+      setState(() => likedImages.add(index));
     }
   }
 }

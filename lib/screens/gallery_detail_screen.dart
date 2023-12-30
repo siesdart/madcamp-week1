@@ -24,7 +24,7 @@ class GalleryDetailScreen extends StatelessWidget {
                   const Divider(height: 32),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context, 'images/$imageName');
+                      Navigator.pop(context, imageIndex);
                     },
                     child: const Text('Like'),
                   ),

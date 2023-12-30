@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:madcamp_week1/screens/contact_screen.dart';
 import 'package:madcamp_week1/screens/gallery_screen.dart';
+import 'package:madcamp_week1/screens/game_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,7 +55,7 @@ class MyHomePage extends StatelessWidget {
             children: const [
               ContactScreen(),
               GalleryScreen(),
-              Text('Tab 3'),
+              GameScreen(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
