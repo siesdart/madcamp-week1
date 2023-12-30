@@ -10,6 +10,7 @@ dependencies:
   dio: ^5.4.0
   flutter:
     sdk: flutter
+  fluttertoast: ^8.2.4
   google_fonts: ^6.1.0
   json_annotation: ^4.8.1
   url_launcher: ^6.2.2
