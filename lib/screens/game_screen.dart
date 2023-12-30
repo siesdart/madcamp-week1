@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:madcamp_week1/models/game_result.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -11,7 +12,9 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   int level = 1;
-  int maxInt = 9;
+  int cntInLev = 0;
+
+  final List<GameResult> gameResult = [];
 
   late FToast fToast;
 
@@ -23,13 +26,21 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     int operand1, operand2;
     String operator;
     final List<String> operators = ['+', '×', '÷', '−'];
     int answer = 0;
     String userAns = '';
+    int maxInt = 9;
+    if(level == 1){
+      maxInt = 9;
+    }
+    else if(level == 2){
+      maxInt = 99;
+    }
+    else if(level == 3){
+      maxInt = 999;
+    }
 
     operand1 = Random().nextInt(maxInt) + 1;
     operand2 = Random().nextInt(maxInt) + 1;
@@ -60,7 +71,6 @@ class _GameScreenState extends State<GameScreen> {
           'Calculating Game',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontFamily: "Arial",
             fontWeight: FontWeight.bold,
             fontSize: 25,
             color: Colors.deepPurple,
@@ -70,10 +80,12 @@ class _GameScreenState extends State<GameScreen> {
           'Current level: '+level.toString(),
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontFamily: 'Arial',
             fontSize: 15,
             color: Colors.black54,
           ),
+        ),
+        SizedBox(
+            height: 30
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,25 +124,74 @@ class _GameScreenState extends State<GameScreen> {
                     userAns = str;
                     checkAnswer(answer.toString(), userAns);
                   });
+                  addToGameResult(operand1.toString(), operand2.toString(), operator, int.parse(userAns), answer);
                 },
-                // onChanged: (String str){
-                //   userAns = str;
-                //   checkAnswer(answer.toString(), userAns);
-                // },
               ),
               width: 200,
             ),
           ],
         ),
         SizedBox(
-          height: 200,
+          height: 50,
         ),
-        Text(
-          'How To Play',
-          style: TextStyle(
-            fontSize: 13,
-            color: Colors.black54,
-            fontWeight: FontWeight.bold,
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.deepPurple[50],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'How To Play',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                  '1. Enter the answer to the given question.',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.black54,
+                  ),
+              ),
+              Text(
+                '2.\n    2-1. If your answer is CORRECT, you\'ll see \"Success!\"',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                ),
+              ),
+              Text(
+                '    2-2. If your answer is INCORRECT, you\'ll see \"Fail..\"',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                ),
+              ),
+              Text(
+                '3. If you get 3 questions correct in current level, you can move on to the next level.',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                ),
+              ),
+              Text(
+                '    3-1. If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n      If the current level is 1, you start from the beginning.',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                ),
+              ),
+              Text(
+                '    3-2. There are levels up to 3.',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -138,11 +199,25 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void checkAnswer(String ans, String input){
+    // role: check answer + initialize game states (ex. level, count, ...)
     if(ans == input){
-      flutterToast("success!");
+      flutterToast("Success!");
+
+      //init status
+      ++cntInLev;
+      if(cntInLev >= 3){
+        ++level;
+        cntInLev = 0;
+      }
     }
     else{
-      flutterToast("fail");
+      flutterToast("Fail..");
+
+      //init status
+      cntInLev = 0;
+      if(level>=2){
+        --level;
+      }
     }
   }
 
@@ -163,5 +238,12 @@ class _GameScreenState extends State<GameScreen> {
       toastDuration: Duration(seconds: 1),
       gravity: ToastGravity.CENTER
     );
+  }
+
+  void addToGameResult(String num1, String num2, String op, int input, int ans){
+    String question = num1 + ' ' + op + ' ' + num2;
+    setState(() {
+      gameResult.add(new GameResult(question: question, yourAnswer: input, correctAnswer: ans));
+    });
   }
 }
