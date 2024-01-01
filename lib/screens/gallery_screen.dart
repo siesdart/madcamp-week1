@@ -13,21 +13,20 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Stack(
         children: <Widget>[
           Positioned(
             // background blue container
             top: 0,
-            right: 0,
             left: 0,
-            bottom: MediaQuery.of(context).size.height * 0.60,
+            right: 0,
+            bottom: MediaQuery.of(context).size.height * 0.6,
             // background blue container
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(120.0),
+                  bottomRight: Radius.circular(120),
                 ),
                 color: Colors.blueAccent,
               ),
@@ -35,9 +34,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
           ),
           Positioned(
             // main column1: every image
-            top: 15.0,
-            left: 20.0,
-            right: 20.0,
+            top: 15,
+            left: 20,
+            right: 20,
             // main column1: every image
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,59 +44,50 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 const Text(
                   'Images',
                   style: TextStyle(
-                    fontSize: 26,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10.0),
-                  padding: EdgeInsets.all(20.0),
-                  height: 300.0,
+                  margin: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.all(20),
+                  height: MediaQuery.of(context).size.height * 0.4,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(38.0),
+                    borderRadius: BorderRadius.circular(38),
                     color: Colors.white,
                     //border: Border.all(color: Colors.blueGrey, width: 1),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.blueGrey.withOpacity(0.7),
-                        blurRadius: 5.0,
-                        spreadRadius: 0.0,
+                        blurRadius: 5,
                         offset: const Offset(0, 3),
-                      )
-                    ]
+                      ),
+                    ],
                   ),
-                  child: (SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        GridView.count(
-                          shrinkWrap: true,
-                          physics: ScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 4,
-                          crossAxisSpacing: 4,
-                          children: List.generate(20, _buildImageButton),
-                        ),
-                      ],
-                    ),
-                  )
-                  )
+                  child: GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    children: List.generate(20, _buildImageButton),
+                  ),
                 ),
               ],
             ),
           ),
           Positioned(
             // 2nd background container
-            top: 450,
-            right: 0,
+            top: MediaQuery.of(context).size.height * 0.6,
             left: 0,
+            right: 0,
             bottom: 0,
             // background blue container
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(120.0),
+                  topLeft: Radius.circular(120),
                 ),
                 color: Colors.blueAccent,
               ),
@@ -105,52 +95,44 @@ class _GalleryScreenState extends State<GalleryScreen> {
           ),
           Positioned(
             // main column2: liked image
-            top: 390,
             left: 20,
             right: 20,
+            bottom: 15,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 const Text(
                   'Liked Images',
                   style: TextStyle(
-                    fontSize: 26,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.blueAccent,
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 10.0),
-                    padding: EdgeInsets.all(20.0),
-                    height: 250.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(38.0),
-                        color: Colors.white,
-                        //border: Border.all(color: Colors.blueGrey, width: 1),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.7),
-                            blurRadius: 5.0,
-                            spreadRadius: 0.0,
-                            offset: const Offset(0, 3),
-                          )
-                        ]
-                    ),
-                    child: (SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          GridView.count(
-                            physics: ScrollPhysics(),
-                            shrinkWrap: true,
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 4,
-                            crossAxisSpacing: 4,
-                            children: _likedImages.map(_buildImageButton).toList(),
-                          ),
-                        ],
+                  margin: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.all(20),
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(38),
+                    color: Colors.white,
+                    //border: Border.all(color: Colors.blueGrey, width: 1),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blueGrey.withOpacity(0.7),
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
                       ),
-                    )
-                    )
+                    ],
+                  ),
+                  child: GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    children: _likedImages.map(_buildImageButton).toList(),
+                  ),
                 ),
               ],
             ),
@@ -178,6 +160,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
   Widget _buildImageButton(int index) {
     return Container(
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(14),
         image: DecorationImage(
           fit: BoxFit.cover,
           image: AssetImage('images/${index + 1}.jpeg'),
@@ -186,6 +169,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
+          borderRadius: BorderRadius.circular(14),
           onTap: () => _onImageButtonPressed(index),
         ),
       ),
