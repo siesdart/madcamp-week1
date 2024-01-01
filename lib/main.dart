@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 
   ThemeData _buildThemeData() {
     final base = ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
       useMaterial3: true,
     );
 
@@ -49,7 +49,7 @@ class MyHomePage extends StatelessWidget {
       builder: (context, snapshot) {
         final currentIndex = snapshot.hasData ? snapshot.data! : 0;
         return Scaffold(
-          appBar: AppBar(title: const Text('Week 1')),
+          appBar: EmptyAppBar(),
           body: IndexedStack(
             index: currentIndex,
             children: const [
@@ -80,4 +80,17 @@ class MyHomePage extends StatelessWidget {
       },
     );
   }
+}
+
+class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container();
+  }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size(0.0, 0.0);
+
 }
