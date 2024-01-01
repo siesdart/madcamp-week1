@@ -9,7 +9,7 @@ class GalleryScreen extends StatefulWidget {
 }
 
 class _GalleryScreenState extends State<GalleryScreen> {
-  List<int> likedImages = [];
+  final List<int> _likedImages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
               crossAxisCount: 3,
               mainAxisSpacing: 4,
               crossAxisSpacing: 4,
-              children: likedImages.map(_buildImageButton).toList(),
+              children: _likedImages.map(_buildImageButton).toList(),
             ),
           ),
         ],
@@ -82,7 +82,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
     );
 
     if (index != null) {
-      setState(() => likedImages.add(index));
+      setState(() => _likedImages.add(index));
     }
   }
 }

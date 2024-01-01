@@ -15,7 +15,7 @@ class GameResultScreen extends StatelessWidget {
       child: Column(
         children: [
           const Text(
-            'Statistics',
+            'Game Result',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -52,29 +52,31 @@ class GameResultScreen extends StatelessWidget {
               ],
             ),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-              columnSpacing: 16,
-              headingTextStyle: const TextStyle(fontSize: 12),
-              dataTextStyle: const TextStyle(fontSize: 12),
-              columns: const [
-                DataColumn(label: Text('#')),
-                DataColumn(label: Text('Question')),
-                DataColumn(label: Text('Grade')),
-                DataColumn(label: Text('Your Answer')),
-                DataColumn(label: Text('Correct Answer')),
-              ],
-              rows: results.indexed
-                  .map<DataRow>((e) => _buildDataRow(e.$1, e.$2))
-                  .toList(),
+          Expanded(
+            child: InteractiveViewer(
+              constrained: false,
+              child: DataTable(
+                columnSpacing: 16,
+                headingTextStyle: const TextStyle(fontSize: 12),
+                dataTextStyle: const TextStyle(fontSize: 12),
+                columns: const [
+                  DataColumn(label: Text('#')),
+                  DataColumn(label: Text('Question')),
+                  DataColumn(label: Text('Grade')),
+                  DataColumn(label: Text('Your Answer')),
+                  DataColumn(label: Text('Correct Answer')),
+                ],
+                rows: results.indexed
+                    .map<DataRow>((e) => _buildDataRow(e.$1, e.$2))
+                    .toList(),
+              ),
             ),
           ),
           const SizedBox(height: 8),
           ElevatedButton.icon(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.exit_to_app),
-            label: const Text('Exit'),
+            icon: const Icon(Icons.restart_alt),
+            label: const Text('Restart'),
           ),
         ],
       ),

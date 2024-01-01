@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:madcamp_week1/models/game_result.dart';
+import 'package:madcamp_week1/screens/game_result_screen.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -11,239 +15,219 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  int level = 1;
-  int cntInLev = 0;
+  late FToast _fToast;
+  final _random = Random();
+  final _operators = ['+', '×', '÷', '−'];
 
-  final List<GameResult> gameResult = [];
+  int _level = 1;
+  int _cntInLevel = 0;
 
-  late FToast fToast;
+  bool _isExited = false;
 
-  void initState(){
+  final List<GameResult> _gameResults = [];
+
+  @override
+  void initState() {
     super.initState();
-    fToast = FToast();
-    fToast.init(context);
+    _fToast = FToast()..init(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    int operand1, operand2;
-    String operator;
-    final List<String> operators = ['+', '×', '÷', '−'];
-    int answer = 0;
-    String userAns = '';
-    int maxInt = 9;
-    if(level == 1){
-      maxInt = 9;
-    }
-    else if(level == 2){
-      maxInt = 99;
-    }
-    else if(level == 3){
-      maxInt = 999;
+    if (_isExited) {
+      return GameResultScreen(results: _gameResults);
     }
 
-    operand1 = Random().nextInt(maxInt) + 1;
-    operand2 = Random().nextInt(maxInt) + 1;
-    final random = Random();
-    operator = (operators.toList()
-      ..shuffle()).first;
-    if (operator == '+') {
-      answer = operand1 + operand2;
-    }
-    else if (operator == '×') {
-      answer = operand1 * operand2;
-    }
-    else if (operator == '÷') {
-      while(operand1 % operand2 != 0){
-        operand1 = Random().nextInt(maxInt) + 1;
-        operand2 = Random().nextInt(maxInt) + 1;
+    final maxInt = pow(10, _level).toInt() - 1;
+    var operand1 = _random.nextInt(maxInt) + 1;
+    var operand2 = _random.nextInt(maxInt) + 1;
+    final operator = _operators[_random.nextInt(_operators.length)];
+
+    if (operator == '÷') {
+      while (operand1 % operand2 != 0) {
+        operand1 = _random.nextInt(maxInt) + 1;
+        operand2 = _random.nextInt(maxInt) + 1;
       }
-      answer = (operand1 / operand2).toInt();
-    }
-    else if (operator == '−') {
-      answer = operand1 - operand2;
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Calculating Game',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-            color: Colors.deepPurple,
+    final answer = switch (operator) {
+      '+' => operand1 + operand2,
+      '×' => operand1 * operand2,
+      '÷' => operand1 ~/ operand2,
+      '−' => operand1 - operand2,
+      _ => 0,
+    };
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Calculating Game',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              color: Colors.deepPurple,
+            ),
           ),
-        ),
-        Text(
-          'Current level: '+level.toString(),
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 15,
-            color: Colors.black54,
+          Text(
+            'Current level: $_level',
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black54,
+            ),
           ),
-        ),
-        SizedBox(
-            height: 30
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              operand1.toString(),
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Text(
-              operator,
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Text(
-              operand2.toString(),
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Text(
-              "=",
-              style:TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Container(
-              child: TextField(
-                style: TextStyle(fontSize: 15, color: Colors.black),
-                decoration: InputDecoration(hintText: 'Enter your answer here.'),
-                textAlign: TextAlign.center,
-                onSubmitted: (String str){
-                  setState(() {
-                    userAns = str;
-                    checkAnswer(answer.toString(), userAns);
-                  });
-                  addToGameResult(operand1.toString(), operand2.toString(), operator, int.parse(userAns), answer);
-                },
-              ),
-              width: 200,
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.deepPurple[50],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          const SizedBox(height: 32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'How To Play',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black54,
-                  fontWeight: FontWeight.bold,
-                ),
+                '$operand1 $operator $operand2 = ',
+                style: const TextStyle(fontSize: 20),
               ),
-              Text(
-                  '1. Enter the answer to the given question.',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.black54,
+              SizedBox(
+                width: 200,
+                child: TextField(
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
                   ),
-              ),
-              Text(
-                '2.\n    2-1. If your answer is CORRECT, you\'ll see \"Success!\"',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black54,
-                ),
-              ),
-              Text(
-                '    2-2. If your answer is INCORRECT, you\'ll see \"Fail..\"',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black54,
-                ),
-              ),
-              Text(
-                '3. If you get 3 questions correct in current level, you can move on to the next level.',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black54,
-                ),
-              ),
-              Text(
-                '    3-1. If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n      If the current level is 1, you start from the beginning.',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black54,
-                ),
-              ),
-              Text(
-                '    3-2. There are levels up to 3.',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black54,
+                  decoration: const InputDecoration(
+                    isDense: true,
+                    hintText: 'Enter your answer',
+                  ),
+                  textAlign: TextAlign.center,
+                  onSubmitted: (str) {
+                    final userAns = int.tryParse(str);
+                    if (userAns == null) return;
+
+                    setState(() {
+                      checkAnswer(answer, str);
+                      addToGameResult(
+                        operand1,
+                        operand2,
+                        operator,
+                        userAns,
+                        answer,
+                      );
+                    });
+                  },
                 ),
               ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-
-  void checkAnswer(String ans, String input){
-    // role: check answer + initialize game states (ex. level, count, ...)
-    if(ans == input){
-      flutterToast("Success!");
-
-      //init status
-      ++cntInLev;
-      if(cntInLev >= 3){
-        ++level;
-        cntInLev = 0;
-      }
-    }
-    else{
-      flutterToast("Fail..");
-
-      //init status
-      cntInLev = 0;
-      if(level>=2){
-        --level;
-      }
-    }
-  }
-
-  flutterToast(String msg){
-    Widget toast = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 2.0),
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32.0),
-        ),
-        color: Colors.deepPurple[200],
+          const SizedBox(height: 48),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.deepPurple[50],
+            ),
+            padding: const EdgeInsets.all(12),
+            child: const Text.rich(
+              TextSpan(
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black54,
+                ),
+                children: [
+                  TextSpan(
+                    text: 'How To Play\n',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(
+                    text: '1. Enter the answer to the given question.\n',
+                  ),
+                  TextSpan(
+                    text:
+                        '2.\n    2-1. If your answer is CORRECT, you\'ll see "Success!"\n',
+                  ),
+                  TextSpan(
+                    text:
+                        '    2-2. If your answer is INCORRECT, you\'ll see "Fail.."\n',
+                  ),
+                  TextSpan(
+                    text:
+                        '3. If you get 3 questions correct in current level, you can move on to the next level.\n',
+                  ),
+                  TextSpan(
+                    text:
+                        '    3-1. If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n      If the current level is 1, you start from the beginning.\n',
+                  ),
+                  TextSpan(
+                    text: '    3-2. There are levels up to 3.',
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ElevatedButton.icon(
+            onPressed: _gameResults.isEmpty
+                ? null
+                : () => setState(() => _isExited = true),
+            icon: const Icon(Icons.exit_to_app),
+            label: const Text('Exit'),
+          ),
+        ],
       ),
-      child: Text(msg, style: TextStyle(color: Colors.deepPurple, fontSize: 20),),
-    );
-
-    fToast.showToast(
-      child: toast,
-      toastDuration: Duration(seconds: 1),
-      gravity: ToastGravity.CENTER
     );
   }
 
-  void addToGameResult(String num1, String num2, String op, int input, int ans){
-    String question = num1 + ' ' + op + ' ' + num2;
+  void checkAnswer(int ans, String input) {
+    // role: check answer + initialize game states (ex. level, count, ...)
+    if (ans.toString() == input) {
+      flutterToast('Success!');
+
+      //init status
+      if (_cntInLevel++ >= 2) {
+        _level++;
+        _cntInLevel = 0;
+      }
+    } else {
+      flutterToast('Fail..');
+
+      //init status
+      _cntInLevel = 0;
+      if (_level >= 2) _level--;
+    }
+  }
+
+  void flutterToast(String msg) {
+    _fToast.showToast(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 2,
+        ),
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32),
+          ),
+          color: Colors.deepPurple[200],
+        ),
+        child: Text(
+          msg,
+          style: const TextStyle(
+            color: Colors.deepPurple,
+            fontSize: 20,
+          ),
+        ),
+      ),
+      toastDuration: const Duration(seconds: 1),
+      gravity: ToastGravity.CENTER,
+    );
+  }
+
+  void addToGameResult(int num1, int num2, String op, int input, int ans) {
     setState(() {
-      gameResult.add(new GameResult(question: question, yourAnswer: input, correctAnswer: ans));
+      _gameResults.add(
+        GameResult(
+          question: '$num1 $op $num2',
+          yourAnswer: input,
+          correctAnswer: ans,
+        ),
+      );
     });
   }
 }
