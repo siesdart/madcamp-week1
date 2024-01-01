@@ -23,19 +23,18 @@ class _GameScreenState extends State<GameScreen> {
   int _cntInLevel = 0;
 
   bool _isExited = false;
-  bool _isFinished = false;
 
   final List<GameResult> _gameResults = [];
 
   @override
   void initState() {
     super.initState();
-    _fToast = FToast()..init(context);
+    _fToast = FToast().init(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isExited || _isFinished) {
+    if (_isExited) {
       return GameResultScreen(
         results: _gameResults,
         onRestart: () {
@@ -197,10 +196,8 @@ class _GameScreenState extends State<GameScreen> {
         _cntInLevel = 0;
       }
 
-      if(_level > 3){
-        setState(() {
-          _isFinished = true;
-        });
+      if (_level > 3) {
+        setState(() => _isExited = true);
       }
     } else {
       flutterToast('Fail..');
@@ -238,14 +235,12 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void addToGameResult(int num1, int num2, String op, int input, int ans) {
-    setState(() {
-      _gameResults.add(
-        GameResult(
-          question: '$num1 $op $num2',
-          yourAnswer: input,
-          correctAnswer: ans,
-        ),
-      );
-    });
+    _gameResults.add(
+      GameResult(
+        question: '$num1 $op $num2',
+        yourAnswer: input,
+        correctAnswer: ans,
+      ),
+    );
   }
 }

@@ -24,36 +24,83 @@ class ContactDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(name)),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(256),
+        child: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(120),
+              ),
+              color: Colors.blueAccent,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: BackButton(
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(48),
+                        color: Colors.white,
+                      ),
+                      child: Hero(
+                        tag: image,
+                        child: Container(
+                          width: 128,
+                          height: 128,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(44),
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(44),
+                            child: Image.network(image),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      phone,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CircleAvatar(
-              radius: 64,
-              backgroundImage: NetworkImage(image),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              phone,
-              style: const TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            const Divider(height: 24),
             Row(
               children: [
                 Expanded(
-                  child: OutlinedButton.icon(
+                  child: ElevatedButton.icon(
                     onPressed: () async {
                       await launchUrl(Uri(scheme: 'tel', path: phone));
                     },
@@ -63,7 +110,7 @@ class ContactDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: OutlinedButton.icon(
+                  child: ElevatedButton.icon(
                     onPressed: () async {
                       await launchUrl(Uri(scheme: 'sms', path: phone));
                     },
@@ -73,7 +120,7 @@ class ContactDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: OutlinedButton.icon(
+                  child: ElevatedButton.icon(
                     onPressed: () async {
                       await launchUrl(Uri(scheme: 'mailto', path: email));
                     },

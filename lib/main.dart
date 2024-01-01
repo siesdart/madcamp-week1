@@ -24,14 +24,15 @@ class MyApp extends StatelessWidget {
 
   ThemeData _buildThemeData() {
     final base = ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+      appBarTheme: const AppBarTheme(color: Colors.blueAccent),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+      ),
       useMaterial3: true,
     );
 
     return base.copyWith(
-      appBarTheme: base.appBarTheme.copyWith(
-        backgroundColor: base.colorScheme.inversePrimary,
-      ),
       textTheme: GoogleFonts.ibmPlexSansKrTextTheme(base.textTheme),
     );
   }
@@ -49,14 +50,15 @@ class MyHomePage extends StatelessWidget {
       builder: (context, snapshot) {
         final currentIndex = snapshot.hasData ? snapshot.data! : 0;
         return Scaffold(
-          appBar: AppBar(title: const Text('Week 1')),
-          body: IndexedStack(
-            index: currentIndex,
-            children: const [
-              ContactScreen(),
-              GalleryScreen(),
-              GameScreen(),
-            ],
+          body: SafeArea(
+            child: IndexedStack(
+              index: currentIndex,
+              children: const [
+                ContactScreen(),
+                GalleryScreen(),
+                GameScreen(),
+              ],
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIndex,
