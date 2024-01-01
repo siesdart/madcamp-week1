@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:madcamp_week1/screens/gallery_detail_screen.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class GalleryScreen extends StatefulWidget {
   const GalleryScreen({super.key});
@@ -10,13 +9,7 @@ class GalleryScreen extends StatefulWidget {
 }
 
 class _GalleryScreenState extends State<GalleryScreen> {
-  late FToast _fToast;
   final List<int> _likedImages = [];
-
-  void initState() {
-    super.initState();
-    _fToast = FToast()..init(context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +17,10 @@ class _GalleryScreenState extends State<GalleryScreen> {
       body: Stack(
         children: <Widget>[
           Positioned(
-            // background blue container
             top: 0,
             left: 0,
             right: 0,
-            bottom: MediaQuery.of(context).size.height * 0.6,
-            // background blue container
+            height: 192,
             child: Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -85,12 +76,10 @@ class _GalleryScreenState extends State<GalleryScreen> {
             ),
           ),
           Positioned(
-            // 2nd background container
-            top: MediaQuery.of(context).size.height * 0.6,
             left: 0,
             right: 0,
             bottom: 0,
-            // background blue container
+            height: 192,
             child: Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -169,47 +158,25 @@ class _GalleryScreenState extends State<GalleryScreen> {
   }
 
   Future<void> _onImageButtonPressed(int imageIndex) async {
+    final isLiked = _likedImages.contains(imageIndex);
     final index = await Navigator.push<int>(
       context,
       MaterialPageRoute(
-        builder: (context) => GalleryDetailScreen(imageIndex: imageIndex),
+        builder: (context) => GalleryDetailScreen(
+          imageIndex: imageIndex,
+          isLiked: isLiked,
+        ),
       ),
     );
 
     if (index != null) {
-      if(_likedImages.contains(index)){
-          flutterToast("This image already exists in 'liked images'.");
-      }
-      else{
-        setState(() => _likedImages.add(index));
-      }
+      setState(() {
+        if (isLiked) {
+          _likedImages.remove(index);
+        } else {
+          _likedImages.add(index);
+        }
+      });
     }
-  }
-
-  void flutterToast(String msg) {
-    _fToast.showToast(
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 2,
-        ),
-        decoration: ShapeDecoration(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
-          ),
-          color: Colors.blueGrey,
-        ),
-        child: Text(
-          msg,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-      toastDuration: const Duration(seconds: 2),
-      gravity: ToastGravity.BOTTOM,
-    );
   }
 }

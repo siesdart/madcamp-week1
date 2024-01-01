@@ -2,117 +2,111 @@ import 'package:flutter/material.dart';
 
 class GalleryDetailScreen extends StatelessWidget {
   final int imageIndex;
+  final bool isLiked;
 
-  const GalleryDetailScreen({required this.imageIndex, super.key});
+  const GalleryDetailScreen({
+    required this.imageIndex,
+    required this.isLiked,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final imageName = '${imageIndex + 1}.jpeg';
 
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Positioned(
-            // background blue container
-            top: 0,
-            right: 0,
-            left: 0,
-            bottom: MediaQuery.of(context).size.height * 0.60,
-            // background blue container
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(120.0),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 192,
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(120),
+                  ),
+                  color: Colors.blueAccent,
                 ),
-                color: Colors.blueAccent,
-              ),
-            ),
-          ),
-          Positioned(
-            // 2nd background container
-            top: 450,
-            right: 0,
-            left: 0,
-            bottom: 0,
-            // background blue container
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(100.0),
-                ),
-                color: Colors.blueAccent,
-              ),
-            ),
-          ),
-          Positioned(
-            // image detail pop-up screen
-            top: 15.0,
-            left: 20.0,
-            right: 20.0,
-            bottom: 15.0,
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              resizeToAvoidBottomInset: false,
-              appBar: EmptyAppBar(),
-              body: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        padding: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(38.0),
-                            color: Colors.white,
-                            //border: Border.all(color: Colors.blueGrey, width: 1),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.blueGrey.withOpacity(0.7),
-                                blurRadius: 5.0,
-                                spreadRadius: 0.0,
-                                offset: const Offset(0, 3),
-                              )
-                            ]
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: BackButton(
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        imageName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
                         ),
-                        child: (SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Icon(
-                                    Icons.close,
-                                    size: 30,
-                                ),
-                              ),
-                              Image.asset('images/$imageName'),
-                              Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    _buildItem('Image Name', imageName),
-                                    const Divider(height: 32),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context, imageIndex);
-                                      },
-                                      child: const Text('Like'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                        )
+                      ),
                     ),
                   ],
                 ),
-              )
-            )
-          ),
-        ],
+              ),
+            ),
+            Positioned.fill(
+              top: 144,
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(32),
+                  ),
+                  color: Colors.white,
+                  //border: Border.all(color: Colors.blueGrey, width: 1),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blueGrey.withOpacity(0.7),
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(28),
+                        child: Image.asset('images/$imageName'),
+                      ),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            _buildItem('Image Name', imageName),
+                            const Divider(height: 32),
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                Navigator.pop(context, imageIndex);
+                              },
+                              icon: isLiked
+                                  ? const Icon(Icons.thumb_down)
+                                  : const Icon(Icons.thumb_up),
+                              label: isLiked
+                                  ? const Text('Unlike')
+                                  : const Text('Like'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -141,17 +135,3 @@ class GalleryDetailScreen extends StatelessWidget {
     );
   }
 }
-
-class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget{
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container();
-  }
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => Size(0.0, 0.0);
-
-}
-
