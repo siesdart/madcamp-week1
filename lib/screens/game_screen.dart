@@ -35,7 +35,17 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     if (_isExited) {
-      return GameResultScreen(results: _gameResults);
+      return GameResultScreen(
+        results: _gameResults,
+        onRestart: () {
+          setState(() {
+            _level = 1;
+            _cntInLevel = 0;
+            _gameResults.clear();
+            _isExited = false;
+          });
+        },
+      );
     }
 
     final maxInt = pow(10, _level).toInt() - 1;

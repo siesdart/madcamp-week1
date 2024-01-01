@@ -3,8 +3,13 @@ import 'package:madcamp_week1/models/game_result.dart';
 
 class GameResultScreen extends StatelessWidget {
   final List<GameResult> results;
+  final VoidCallback onRestart;
 
-  const GameResultScreen({required this.results, super.key});
+  const GameResultScreen({
+    required this.results,
+    required this.onRestart,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +79,7 @@ class GameResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ElevatedButton.icon(
-            onPressed: () => Navigator.pop(context),
+            onPressed: onRestart,
             icon: const Icon(Icons.restart_alt),
             label: const Text('Restart'),
           ),
