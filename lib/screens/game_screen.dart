@@ -23,6 +23,7 @@ class _GameScreenState extends State<GameScreen> {
   int _cntInLevel = 0;
 
   bool _isExited = false;
+  bool _isFinished = false;
 
   final List<GameResult> _gameResults = [];
 
@@ -34,7 +35,7 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_isExited) {
+    if (_isExited || _isFinished) {
       return GameResultScreen(
         results: _gameResults,
         onRestart: () {
@@ -128,6 +129,14 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ],
           ),
+          const SizedBox(height: 40),
+          ElevatedButton.icon(
+            onPressed: _gameResults.isEmpty
+                ? null
+                : () => setState(() => _isExited = true),
+            icon: const Icon(Icons.exit_to_app),
+            label: const Text('Exit'),
+          ),
           const SizedBox(height: 48),
           Container(
             decoration: BoxDecoration(
@@ -172,13 +181,6 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ),
           ),
-          ElevatedButton.icon(
-            onPressed: _gameResults.isEmpty
-                ? null
-                : () => setState(() => _isExited = true),
-            icon: const Icon(Icons.exit_to_app),
-            label: const Text('Exit'),
-          ),
         ],
       ),
     );
@@ -193,6 +195,12 @@ class _GameScreenState extends State<GameScreen> {
       if (_cntInLevel++ >= 2) {
         _level++;
         _cntInLevel = 0;
+      }
+
+      if(_level > 3){
+        setState(() {
+          _isFinished = true;
+        });
       }
     } else {
       flutterToast('Fail..');
