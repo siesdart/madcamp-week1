@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:madcamp_week1/screens/gallery_detail_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class GalleryScreen extends StatefulWidget {
   const GalleryScreen({super.key});
@@ -9,7 +10,13 @@ class GalleryScreen extends StatefulWidget {
 }
 
 class _GalleryScreenState extends State<GalleryScreen> {
+  late FToast _fToast;
   final List<int> _likedImages = [];
+
+  void initState() {
+    super.initState();
+    _fToast = FToast()..init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +192,39 @@ class _GalleryScreenState extends State<GalleryScreen> {
     );
 
     if (index != null) {
-      setState(() => _likedImages.add(index));
+      if(_likedImages.contains(index)){
+          flutterToast("This image already exists in 'liked images'.");
+      }
+      else{
+        setState(() => _likedImages.add(index));
+      }
     }
+  }
+
+  void flutterToast(String msg) {
+    _fToast.showToast(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 2,
+        ),
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(38),
+          ),
+          color: Colors.white70,
+        ),
+        child: Text(
+          msg,
+          style: const TextStyle(
+            color: Colors.blueAccent,
+            fontSize: 13,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+      toastDuration: const Duration(seconds: 2),
+      gravity: ToastGravity.TOP,
+    );
   }
 }
