@@ -15,6 +15,8 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  final _answerController = TextEditingController();
+
   late FToast _fToast;
   final _random = Random();
   final _operators = ['+', '×', '÷', '−'];
@@ -25,6 +27,12 @@ class _GameScreenState extends State<GameScreen> {
   bool _isExited = false;
 
   final List<GameResult> _gameResults = [];
+
+  @override
+  void dispose() {
+    _answerController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -69,146 +77,138 @@ class _GameScreenState extends State<GameScreen> {
     };
 
     return Scaffold(
-      body:
-        SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fitHeight,
+              image: AssetImage('images/game_background1.jpg'),
+            ),
+          ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    alignment: Alignment.center,
-                    fit: BoxFit.fitHeight,
-                    image: AssetImage('images/game_background1.jpg'),
-                  ),
+              const SizedBox(height: 32),
+              const Text(
+                'Calculating Game',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28,
+                  color: Colors.blueAccent,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    const Text(
-                      'Calculating Game',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 28,
-                        color: Colors.blueAccent,
-                      ),
-                    ),
-                    Text(
-                      'Current level: $_level',
+              ),
+              Text(
+                'Current level: $_level',
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.black54,
+                ),
+              ),
+              const SizedBox(height: 32),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$operand1 $operator $operand2 = ',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    width: 180,
+                    child: TextField(
+                      controller: _answerController,
                       style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
+                        fontSize: 18,
+                        color: Colors.black,
                       ),
-                    ),
-                    const SizedBox(height: 32),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          '$operand1 $operator $operand2 = ',
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                        SizedBox(
-                          width: 180,
-                          child: TextField(
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            ),
-                            decoration: const InputDecoration(
-                              isDense: true,
-                              hintText: 'Enter your answer',
-                            ),
-                            textAlign: TextAlign.center,
-                            onSubmitted: (str) {
-                              final userAns = int.tryParse(str);
-                              if (userAns == null) return;
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                        isDense: true,
+                        hintText: 'Enter your answer',
+                      ),
+                      textAlign: TextAlign.center,
+                      keyboardType:
+                          const TextInputType.numberWithOptions(signed: true),
+                      onSubmitted: (str) {
+                        final userAns = int.tryParse(str);
+                        if (userAns == null) return;
 
-                              setState(() {
-                                checkAnswer(answer, str);
-                                addToGameResult(
-                                  operand1,
-                                  operand2,
-                                  operator,
-                                  userAns,
-                                  answer,
-                                );
-                              });
-                            },
+                        _gameResults.add(
+                          GameResult(
+                            question: '$operand1 $operator $operand2',
+                            yourAnswer: userAns,
+                            correctAnswer: answer,
                           ),
-                        ),
-                      ],
+                        );
+
+                        setState(() {
+                          checkAnswer(answer, userAns);
+                          _answerController.clear();
+                        });
+                      },
                     ),
-                    const SizedBox(height: 20),
-                    ElevatedButton.icon(
-                      onPressed: _gameResults.isEmpty
-                          ? null
-                          : () => setState(() => _isExited = true),
-                      icon: const Icon(Icons.exit_to_app),
-                      label: const Text('Exit'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: _gameResults.isEmpty
+                    ? null
+                    : () => setState(() => _isExited = true),
+                icon: const Icon(Icons.exit_to_app),
+                label: const Text('Exit'),
+              ),
+              const SizedBox(height: 200),
+              Container(
+                decoration: const BoxDecoration(color: Colors.white70),
+                padding: const EdgeInsets.all(12),
+                child: const Text.rich(
+                  TextSpan(
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.black54,
                     ),
-                    const SizedBox(height: 200),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white70,
+                    children: [
+                      TextSpan(
+                        text: 'How To Play\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      padding: const EdgeInsets.all(12),
-                      child: const Text.rich(
-                        TextSpan(
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black54,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'How To Play\n',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            TextSpan(
-                              text: '1. Enter the answer to the given question.\n',
-                            ),
-                            TextSpan(
-                              text:
-                              '2.\n    2-1. If your answer is CORRECT, you\'ll see "Success!"\n',
-                            ),
-                            TextSpan(
-                              text:
-                              '    2-2. If your answer is INCORRECT, you\'ll see "Fail.."\n',
-                            ),
-                            TextSpan(
-                              text:
-                              '3. If you get 3 questions correct in current level, you can move on to the next level.\n',
-                            ),
-                            TextSpan(
-                              text:
-                              '    3-1. If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n      If the current level is 1, you start from the beginning.\n',
-                            ),
-                            TextSpan(
-                              text: '    3-2. There are levels up to 3.',
-                            ),
-                          ],
-                        ),
+                      TextSpan(
+                        text: '1. Enter the answer to the given question.\n',
                       ),
-                    ),
-                  ],
+                      TextSpan(
+                        text:
+                            '2.\n    2-1. If your answer is CORRECT, you\'ll see "Success!"\n',
+                      ),
+                      TextSpan(
+                        text:
+                            '    2-2. If your answer is INCORRECT, you\'ll see "Fail.."\n',
+                      ),
+                      TextSpan(
+                        text:
+                            '3. If you get 3 questions correct in current level, you can move on to the next level.\n',
+                      ),
+                      TextSpan(
+                        text:
+                            '    3-1. If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n      If the current level is 1, you start from the beginning.\n',
+                      ),
+                      TextSpan(
+                        text: '    3-2. There are levels up to 3.',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
         ),
-
+      ),
     );
   }
 
-  void checkAnswer(int ans, String input) {
+  void checkAnswer(int ans, int input) {
     // role: check answer + initialize game states (ex. level, count, ...)
-    if (ans.toString() == input) {
+    if (ans == input) {
       flutterToast('Good Job!', 'images/game_success.png');
 
       //init status
@@ -217,9 +217,7 @@ class _GameScreenState extends State<GameScreen> {
         _cntInLevel = 0;
       }
 
-      if (_level > 3) {
-        setState(() => _isExited = true);
-      }
+      if (_level > 3) _isExited = true;
     } else {
       flutterToast('Wrong Answer..', 'images/game_fail.png');
 
@@ -229,26 +227,24 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
-  void flutterToast(String msg, String icons) {
+  void flutterToast(String msg, String icon) {
     _fToast.showToast(
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 24,
           vertical: 2,
         ),
-        decoration: ShapeDecoration(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
-          ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32),
           color: Colors.transparent,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-               icons,
-               width: 100,
-               height: 100,
+              icon,
+              width: 100,
+              height: 100,
             ),
             Text(
               msg,
@@ -263,16 +259,6 @@ class _GameScreenState extends State<GameScreen> {
       ),
       toastDuration: const Duration(seconds: 1),
       gravity: ToastGravity.CENTER,
-    );
-  }
-
-  void addToGameResult(int num1, int num2, String op, int input, int ans) {
-    _gameResults.add(
-      GameResult(
-        question: '$num1 $op $num2',
-        yourAnswer: input,
-        correctAnswer: ans,
-      ),
     );
   }
 }
