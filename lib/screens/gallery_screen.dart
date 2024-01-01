@@ -147,21 +147,6 @@ class _GalleryScreenState extends State<GalleryScreen> {
         ],
       ),
     );
-    // return Padding(
-    //   padding: const EdgeInsets.all(8),
-    //   child: Column(
-    //       const SizedBox(height: 8),
-    //       Expanded(
-    //         child: GridView.count(
-    //           crossAxisCount: 3,
-    //           mainAxisSpacing: 4,
-    //           crossAxisSpacing: 4,
-    //           children: _likedImages.map(_buildImageButton).toList(),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 
   Widget _buildImageButton(int index) {
@@ -210,21 +195,21 @@ class _GalleryScreenState extends State<GalleryScreen> {
         ),
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(38),
+            borderRadius: BorderRadius.circular(32),
           ),
-          color: Colors.white70,
+          color: Colors.blueGrey,
         ),
         child: Text(
           msg,
           style: const TextStyle(
-            color: Colors.blueAccent,
-            fontSize: 13,
+            color: Colors.white,
+            fontSize: 15,
           ),
           textAlign: TextAlign.center,
         ),
       ),
       toastDuration: const Duration(seconds: 2),
-      gravity: ToastGravity.TOP,
+      gravity: ToastGravity.BOTTOM,
     );
   }
 }
