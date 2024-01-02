@@ -25,7 +25,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - images/game_background1.jpg
     - images/game_fail.png
     - images/game_success.png
     - images/1.jpeg
@@ -48,4 +47,5 @@ flutter:
     - images/18.jpeg
     - images/19.jpeg
     - images/20.jpeg
+    - images/game_bg.png
 

@@ -26,7 +26,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(120),
                 ),
-                color: Colors.blueAccent,
+                color: Colors.indigoAccent,
               ),
             ),
           ),
@@ -78,7 +78,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(120),
                 ),
-                color: Colors.blueAccent,
+                color: Colors.indigoAccent,
               ),
             ),
           ),
@@ -95,7 +95,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent,
+                    color: Colors.indigoAccent,
                   ),
                 ),
                 const SizedBox(height: 8),

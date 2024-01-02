@@ -31,7 +31,7 @@ class ContactScreen extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(120),
                 ),
-                color: Colors.blueAccent,
+                color: Colors.indigoAccent,
               ),
               child: const Center(
                 child: Text(
