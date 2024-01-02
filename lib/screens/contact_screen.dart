@@ -45,7 +45,6 @@ class ContactScreen extends StatelessWidget {
                         bottom: Radius.circular(16),
                       ),
                       hintText: 'Search...',
-                      style: const TextStyle(fontSize: 18),
                       onChanged: (text) =>
                           ref.read(userQueryProvider.notifier).state = text,
                     ),

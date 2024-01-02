@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:madcamp_week1/widgets/custom_app_bar.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget title;
@@ -25,13 +26,7 @@ class CustomScaffold extends StatelessWidget {
               left: 0,
               right: 0,
               height: height,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(120),
-                  ),
-                  color: theme.appBarTheme.backgroundColor,
-                ),
+              child: CustomAppBar(
                 child: Center(
                   child: DefaultTextStyle(
                     style: theme.textTheme.titleLarge?.copyWith(

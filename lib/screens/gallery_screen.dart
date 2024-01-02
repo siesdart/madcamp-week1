@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:madcamp_week1/providers/image.dart';
 import 'package:madcamp_week1/screens/gallery_detail_screen.dart';
+import 'package:madcamp_week1/widgets/custom_app_bar.dart';
 
 class GalleryScreen extends StatelessWidget {
   const GalleryScreen({super.key});
@@ -10,121 +11,102 @@ class GalleryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Positioned(
+        const Positioned(
           top: 0,
           left: 0,
           right: 0,
           height: 192,
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(120),
-              ),
-              color: Colors.indigoAccent,
-            ),
-          ),
+          child: CustomAppBar(),
         ),
         Positioned(
           left: 0,
           right: 0,
           bottom: 0,
           height: 192,
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(120),
-              ),
-              color: Colors.indigoAccent,
-            ),
+          child: Transform.flip(
+            flipX: true,
+            flipY: true,
+            child: const CustomAppBar(),
           ),
         ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: SingleChildScrollView(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const Text(
-                        'All Images',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              blurRadius: 10.0,
-                              color: Colors.indigoAccent,
-                              offset: Offset(0.5, 0.5),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(38),
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.blueGrey, width: 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blueGrey.withOpacity(0.7),
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: _buildGridView((_) => Iterable<int>.generate(20)),
+        Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                'All Images',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10,
+                      color: Colors.indigoAccent,
+                      offset: Offset(0.5, 0.5),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(38),
+                    color: Colors.white,
+                    //border: Border.all(color: Colors.blueGrey, width: 1),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blueGrey.withOpacity(0.7),
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
-                const SizedBox(height: 30),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      const Text(
-                        'Liked Images',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              blurRadius: 10.0,
-                              color: Colors.indigoAccent,
-                              offset: Offset(0.5, 0.5),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(38),
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.blueGrey, width: 1),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blueGrey.withOpacity(0.7),
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: _buildGridView(
-                              (ref) => ref.watch(likedImagesNotifierProvider),
-                        ),
+                  child: _buildGridView((_) => Iterable<int>.generate(20)),
+                ),
+              ),
+              const SizedBox(height: 32),
+              const Text(
+                'Liked Images',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10,
+                      color: Colors.indigoAccent,
+                      offset: Offset(0.5, 0.5),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(38),
+                    color: Colors.white,
+                    //border: Border.all(color: Colors.blueGrey, width: 1),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blueGrey.withOpacity(0.7),
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
-              ],
-            ),
+                  child: _buildGridView(
+                    (ref) => ref.watch(likedImagesNotifierProvider),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],

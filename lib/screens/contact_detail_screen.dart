@@ -59,7 +59,7 @@ class ContactDetailScreen extends StatelessWidget {
     return Material(
       type: MaterialType.circle,
       elevation: 3,
-      color: Colors.blueGrey,
+      color: Colors.transparent,
       shadowColor: Colors.blueGrey.withOpacity(0.7),
       child: IconButton.filled(
         padding: const EdgeInsets.all(12),
@@ -106,7 +106,7 @@ class ContactDetailScreen extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 8),
         Text(
           phone,
           style: const TextStyle(
