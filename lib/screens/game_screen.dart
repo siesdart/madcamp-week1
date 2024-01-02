@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:madcamp_week1/models/game_result.dart';
 import 'package:madcamp_week1/screens/game_result_screen.dart';
+import 'package:madcamp_week1/screens/game_instruction_screen.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -88,7 +89,7 @@ class _GameScreenState extends State<GameScreen> {
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(120),
               ),
-              color: Colors.blueAccent,
+              color: Colors.indigoAccent,
             ),
           ),
         ),
@@ -96,7 +97,7 @@ class _GameScreenState extends State<GameScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 10),
+                //const SizedBox(height: 10),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -107,9 +108,16 @@ class _GameScreenState extends State<GameScreen> {
                         fontWeight: FontWeight.bold,
                         fontSize: 32,
                         color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 5.0,
+                            color: Colors.grey,
+                            offset: Offset(1.0, 1.0),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 30),
                     Container(
                       width: 400,
                       height: 40,
@@ -185,13 +193,116 @@ class _GameScreenState extends State<GameScreen> {
                         ),
                       ),
                     ),
-                    // Text(
-                    //   'Current level: $_level',
-                    //   style: const TextStyle(
-                    //     fontSize: 16,
-                    //     color: Colors.black54,
-                    //   ),
-                    // ),
+                    Container(
+                      width: 300,
+                      height: 18,
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: Scaffold(
+                        backgroundColor: Colors.transparent,
+                        body: Stack(
+                          children: [
+                            Positioned(
+                              left: 30,
+                              right: 30,
+                              child: Container(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                  right: 10,
+                                ),
+                                width: 300,
+                                height: 18,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
+                                  color: Colors.white38,
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '1',
+                                      style: TextStyle(
+                                        //fontWeight: FontWeight.bold,
+                                        fontSize: 11
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      '2',
+                                      style: TextStyle(
+                                        //fontWeight: FontWeight.bold,
+                                          fontSize: 11
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      '3',
+                                      style: TextStyle(
+                                        //fontWeight: FontWeight.bold,
+                                          fontSize: 11
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            AnimatedPositioned(
+                              top: 0,
+                              left: (_cntInLevel == 0)
+                                  ? 30
+                                  : (_cntInLevel == 1)
+                                  ? 110
+                                  : (_cntInLevel == 2)
+                                  ? 190
+                                  : 0,
+                              duration: const Duration(seconds: 2),
+                              curve: Curves.ease,
+                              child: Container(
+                                width: 80,
+                                height: 18,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
+                                  color: Colors.black12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 50,),
+                    ElevatedButton(
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => GameInst(),
+                          ),);
+                          GameInst();
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                            const EdgeInsets.symmetric(horizontal: 10, vertical : 0,)
+                          ),
+                        ),
+                        child:
+                            const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.question_mark),
+                                Text(
+                                  'How to play',
+                                  style: TextStyle(
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ),
                     const SizedBox(height: 60),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +310,9 @@ class _GameScreenState extends State<GameScreen> {
                       children: [
                         Text(
                           '$operand1 $operator $operand2 = ',
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(
+                              fontSize: 22,
+                          ),
                         ),
                         SizedBox(
                           width: 180,
@@ -232,57 +345,26 @@ class _GameScreenState extends State<GameScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 60),
                     ElevatedButton.icon(
                       onPressed: _gameResults.isEmpty
                           ? null
                           : () => setState(() => _isExited = true),
                       icon: const Icon(Icons.exit_to_app),
-                      label: const Text('Exit'),
-                    ),
-                    const SizedBox(height: 80),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white70,
-                      ),
-                      padding: const EdgeInsets.all(12),
-                      child: const Text.rich(
-                        TextSpan(
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black54,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'How To Play\n',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            TextSpan(
-                              text:
-                                  '1. Enter the answer to the given question.\n',
-                            ),
-                            TextSpan(
-                              text:
-                                  '2.\n    2-1. If your answer is CORRECT, you\'ll see "Success!"\n',
-                            ),
-                            TextSpan(
-                              text:
-                                  '    2-2. If your answer is INCORRECT, you\'ll see "Fail.."\n',
-                            ),
-                            TextSpan(
-                              text:
-                                  '3. If you get 3 questions correct in current level, you can move on to the next level.\n',
-                            ),
-                            TextSpan(
-                              text:
-                                  '    3-1. If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n      If the current level is 1, you start from the beginning.\n',
-                            ),
-                            TextSpan(
-                              text: '    3-2. There are levels up to 3.',
-                            ),
-                          ],
+                      label: const Text(
+                          'Exit',
+                        style: TextStyle(
+                          color: Colors.indigo,
                         ),
                       ),
+                    ),
+                    const SizedBox(height: 100),
+                    Image.asset(
+                      'images/game_bg.png',
+                      width: 60,
+                      height: 60,
+                      color: const Color.fromRGBO(255, 255, 255, 0.4),
+                      colorBlendMode: BlendMode.modulate,
                     ),
                   ],
                 ),

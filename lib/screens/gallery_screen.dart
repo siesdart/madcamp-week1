@@ -20,7 +20,7 @@ class GalleryScreen extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(120),
               ),
-              color: Colors.blueAccent,
+              color: Colors.indigoAccent,
             ),
           ),
         ),
@@ -72,7 +72,7 @@ class GalleryScreen extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(120),
               ),
-              color: Colors.blueAccent,
+              color: Colors.indigoAccent,
             ),
           ),
         ),
@@ -89,7 +89,7 @@ class GalleryScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+                  color: Colors.indigoAccent,
                 ),
               ),
               const SizedBox(height: 8),
