@@ -47,9 +47,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     color: Colors.white,
                   ),
                 ),
+                const SizedBox(height: 8),
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(16),
                   height: MediaQuery.of(context).size.height * 0.4,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(38),
@@ -63,14 +63,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                       ),
                     ],
                   ),
-                  child: GridView.count(
-                    physics: const ScrollPhysics(),
-                    shrinkWrap: true,
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
-                    children: List.generate(20, _buildImageButton),
-                  ),
+                  child: _buildGridView(Iterable<int>.generate(20)),
                 ),
               ],
             ),
@@ -105,9 +98,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     color: Colors.blueAccent,
                   ),
                 ),
+                const SizedBox(height: 8),
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(16),
                   height: MediaQuery.of(context).size.height * 0.3,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(38),
@@ -121,20 +114,24 @@ class _GalleryScreenState extends State<GalleryScreen> {
                       ),
                     ],
                   ),
-                  child: GridView.count(
-                    physics: const ScrollPhysics(),
-                    shrinkWrap: true,
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
-                    children: _likedImages.map(_buildImageButton).toList(),
-                  ),
+                  child: _buildGridView(_likedImages),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  GridView _buildGridView(Iterable<int> images) {
+    return GridView.count(
+      physics: const ScrollPhysics(),
+      shrinkWrap: true,
+      crossAxisCount: 3,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      children: images.map(_buildImageButton).toList(),
     );
   }
 

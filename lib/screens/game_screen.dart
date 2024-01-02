@@ -15,6 +15,8 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  final _answerController = TextEditingController();
+
   late FToast _fToast;
   final _random = Random();
   final _operators = ['+', '×', '÷', '−'];
@@ -25,6 +27,12 @@ class _GameScreenState extends State<GameScreen> {
   bool _isExited = false;
 
   final List<GameResult> _gameResults = [];
+
+  @override
+  void dispose() {
+    _answerController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -278,12 +286,13 @@ class _GameScreenState extends State<GameScreen> {
             ),
           ],
         ),
+      ),
     );
   }
 
-  void checkAnswer(int ans, String input) {
+  void checkAnswer(int ans, int input) {
     // role: check answer + initialize game states (ex. level, count, ...)
-    if (ans.toString() == input) {
+    if (ans == input) {
       flutterToast('Good Job!', 'images/game_success.png');
 
       //init status
@@ -292,9 +301,7 @@ class _GameScreenState extends State<GameScreen> {
         _cntInLevel = 0;
       }
 
-      if (_level > 3) {
-        setState(() => _isExited = true);
-      }
+      if (_level > 3) _isExited = true;
     } else {
       flutterToast('Wrong Answer..', 'images/game_fail.png');
 
@@ -304,26 +311,24 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
-  void flutterToast(String msg, String icons) {
+  void flutterToast(String msg, String icon) {
     _fToast.showToast(
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 24,
           vertical: 2,
         ),
-        decoration: ShapeDecoration(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
-          ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32),
           color: Colors.transparent,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-               icons,
-               width: 100,
-               height: 100,
+              icon,
+              width: 100,
+              height: 100,
             ),
             Text(
               msg,
@@ -338,16 +343,6 @@ class _GameScreenState extends State<GameScreen> {
       ),
       toastDuration: const Duration(seconds: 1),
       gravity: ToastGravity.CENTER,
-    );
-  }
-
-  void addToGameResult(int num1, int num2, String op, int input, int ans) {
-    _gameResults.add(
-      GameResult(
-        question: '$num1 $op $num2',
-        yourAnswer: input,
-        correctAnswer: ans,
-      ),
     );
   }
 }
