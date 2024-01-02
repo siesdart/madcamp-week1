@@ -42,7 +42,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 const Text(
                   'Images',
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -93,7 +93,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 const Text(
                   'Liked Images',
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.blueAccent,
                   ),
