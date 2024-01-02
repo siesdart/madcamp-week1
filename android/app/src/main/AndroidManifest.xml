@@ -20,7 +20,7 @@
     </queries>
 
     <application
-        android:label="madcamp_week1"
+        android:label="C.G.V"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

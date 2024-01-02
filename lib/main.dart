@@ -9,6 +9,37 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
+class IntroScreen extends StatelessWidget{
+
+  const IntroScreen({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image: AssetImage('images/logo.png'),
+              fit: BoxFit.cover,
+            ),
+            Text(
+              'Contact / Gallery / Variety',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -17,8 +48,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Week 1',
       theme: _buildThemeData(),
-      home: const MyHomePage(),
+      home: FutureBuilder(
+        future: Future.delayed(const Duration(seconds: 3),
+            () => "Intro Completed",
+        ),
+        builder: (context, snapshot){
+          return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 1000),
+              child: _splashLoadingWidget(snapshot),
+          );
+        },
+      ),
     );
+
+
   }
 
   ThemeData _buildThemeData() {
@@ -37,6 +80,18 @@ class MyApp extends StatelessWidget {
         base.textTheme.apply(bodyColor: Colors.black87),
       ),
     );
+  }
+
+  Widget _splashLoadingWidget(AsyncSnapshot<Object?> snapshot){
+    if(snapshot.hasError){
+      return const Text("error");
+    }
+    else if(snapshot.hasData){
+      return const MyHomePage();
+    }
+    else{
+      return const IntroScreen();
+    }
   }
 }
 
