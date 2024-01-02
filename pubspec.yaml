@@ -10,6 +10,7 @@ dependencies:
   dio: ^5.4.0
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.4.9
   fluttertoast: ^8.2.4
   google_fonts: ^6.1.0
   json_annotation: ^4.8.1
@@ -17,35 +18,14 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.7
+  custom_lint: ^0.5.7
   flutter_test:
     sdk: flutter
   json_serializable: ^6.7.1
+  riverpod_lint: ^2.3.7
   very_good_analysis: ^5.1.0
 
 flutter:
   uses-material-design: true
   assets:
-    - images/game_background1.jpg
-    - images/game_fail.png
-    - images/game_success.png
-    - images/1.jpeg
-    - images/2.jpeg
-    - images/3.jpeg
-    - images/4.jpeg
-    - images/5.jpeg
-    - images/6.jpeg
-    - images/7.jpeg
-    - images/8.jpeg
-    - images/9.jpeg
-    - images/10.jpeg
-    - images/11.jpeg
-    - images/12.jpeg
-    - images/13.jpeg
-    - images/14.jpeg
-    - images/15.jpeg
-    - images/16.jpeg
-    - images/17.jpeg
-    - images/18.jpeg
-    - images/19.jpeg
-    - images/20.jpeg
-
+    - images/

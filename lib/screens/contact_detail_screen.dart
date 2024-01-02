@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:madcamp_week1/widgets/custom_scaffold.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactDetailScreen extends StatelessWidget {
@@ -23,114 +24,24 @@ class ContactDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(256),
-        child: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(120),
-              ),
-              color: Colors.blueAccent,
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: BackButton(
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(48),
-                        color: Colors.white,
-                      ),
-                      child: Hero(
-                        tag: image,
-                        child: Container(
-                          width: 128,
-                          height: 128,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(44),
-                            color:
-                                Theme.of(context).colorScheme.primaryContainer,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(44),
-                            child: Image.network(image),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      phone,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return CustomScaffold(
+      title: _buildTitle(context),
+      height: 300,
       body: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () async {
-                      await launchUrl(Uri(scheme: 'tel', path: phone));
-                    },
-                    icon: const Icon(Icons.phone),
-                    label: const Text('Call'),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () async {
-                      await launchUrl(Uri(scheme: 'sms', path: phone));
-                    },
-                    icon: const Icon(Icons.sms),
-                    label: const Text('SMS'),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () async {
-                      await launchUrl(Uri(scheme: 'mailto', path: email));
-                    },
-                    icon: const Icon(Icons.email),
-                    label: const Text('Email'),
-                  ),
-                ),
+                _buildLaunchButton(const Icon(Icons.phone), 'tel', phone),
+                const SizedBox(width: 24),
+                _buildLaunchButton(const Icon(Icons.sms), 'sms', phone),
+                const SizedBox(width: 24),
+                _buildLaunchButton(const Icon(Icons.email), 'mailto', email),
               ],
             ),
-            const Divider(height: 24),
+            const SizedBox(height: 16),
             _buildItem('Birth', birthDate),
             const SizedBox(height: 4),
             _buildItem('Email', email),
@@ -141,6 +52,70 @@ class ContactDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildLaunchButton(Widget icon, String scheme, String path) {
+    return Material(
+      type: MaterialType.circle,
+      elevation: 3,
+      color: Colors.blueGrey,
+      shadowColor: Colors.blueGrey.withOpacity(0.7),
+      child: IconButton.filled(
+        padding: const EdgeInsets.all(12),
+        onPressed: () async {
+          await launchUrl(Uri(scheme: scheme, path: path));
+        },
+        icon: icon,
+      ),
+    );
+  }
+
+  Widget _buildTitle(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(48),
+            color: Colors.white,
+          ),
+          child: Hero(
+            tag: image,
+            child: Container(
+              width: 128,
+              height: 128,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(44),
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(44),
+                child: Image.network(image),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          name,
+          style: const TextStyle(
+            color: Colors.black87,
+            fontSize: 24,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          phone,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.normal,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 
