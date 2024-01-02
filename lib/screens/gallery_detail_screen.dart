@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:madcamp_week1/widgets/custom_scaffold.dart';
 
-class GalleryDetailScreen extends StatelessWidget {
+class GalleryDetailScreen extends StatefulWidget {
   final int index;
   final bool isLiked;
 
@@ -12,8 +13,13 @@ class GalleryDetailScreen extends StatelessWidget {
   });
 
   @override
+  State<GalleryDetailScreen> createState() => _GalleryDetailScreenState();
+}
+
+class _GalleryDetailScreenState extends State<GalleryDetailScreen> {
+  @override
   Widget build(BuildContext context) {
-    final imageName = '${index + 1}.jpeg';
+    final String imageName = '${widget.index + 1}.jpeg';
 
     return CustomScaffold(
       title: Text(imageName),
@@ -55,12 +61,12 @@ class GalleryDetailScreen extends StatelessWidget {
                   const Divider(height: 32),
                   ElevatedButton.icon(
                     onPressed: () {
-                      Navigator.pop(context, index);
+                      Navigator.pop(context, widget.index);
                     },
-                    icon: isLiked
+                    icon: widget.isLiked
                         ? const Icon(Icons.thumb_down)
                         : const Icon(Icons.thumb_up),
-                    label: isLiked ? const Text('Unlike') : const Text('Like'),
+                    label: widget.isLiked ? const Text('Unlike') : const Text('Like'),
                   ),
                 ],
               ),
