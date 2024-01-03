@@ -10,7 +10,7 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 
 
-## 👨‍💻 팀원
+## 팀원
 |이름|소속|Github|
 |---|---|---|
 |🐰 김선희|한양대학교 컴퓨터소프트웨어학부|<a href="https://github.com/sunnygeem" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
@@ -18,14 +18,14 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 
 
-## 🖥️ 개발 환경
+## 개발 환경
 - Language: Dart
 - Frontend: Flutter
 - IDE: Android Studio, Visual Studio Code
 
 
 
-## 📝 프로젝트 설명
+## 프로젝트 설명
 이 어플은 Tab 단위로 구성되어 있습니다.
 이동하고자 하는 Tab의 아이콘을 누르면, 해당 Tab으로 이동할 수 있습니다.
 ![tab bar](https://github.com/siesdart/madcamp-week1/assets/91830035/4ef75adc-337f-47f7-abaa-8f75d1286802)
