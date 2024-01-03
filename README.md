@@ -38,8 +38,8 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 **[flow]**
 <p align="center">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/b3a18445-2478-444b-a44a-669e123adc5d" width="30%">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/8fe53027-647b-43a6-bc3a-117bd4890894" width="30%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/b3a18445-2478-444b-a44a-669e123adc5d" width="20%"><span>Search Contact</span>
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/8fe53027-647b-43a6-bc3a-117bd4890894" width="20%"><span>Navigate to another app</span>
 </p>
 
 **[기능]**
@@ -55,10 +55,10 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 **[flow]**
 <p align="center">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/a1c16ea6-b513-49c5-88fc-e090da1d79be" width="20%">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/c0a9cd97-eacc-47fc-834c-4f3ef6e0a1d7" width="20%">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/d63a54f1-b16f-49d0-ad68-5807f169c57e" width="20%">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/02e48d92-f529-4637-99e6-44af31cea4da" width="20%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/a1c16ea6-b513-49c5-88fc-e090da1d79be" width="15%"><span>Scroll view</span>
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/c0a9cd97-eacc-47fc-834c-4f3ef6e0a1d7" width="15%"><span>Image detail</span>
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/d63a54f1-b16f-49d0-ad68-5807f169c57e" width="15%"><span>Press Like</span>
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/02e48d92-f529-4637-99e6-44af31cea4da" width="15%"><span>Press Unlike</span>
 </p>
 
 **[기능]**
@@ -77,7 +77,7 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 **[flow]**
 <p align="center">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/e5699812-cf6b-4c6f-8259-75bc583fff45" width="30%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/e5699812-cf6b-4c6f-8259-75bc583fff45" width="30%"><span>Play game</span>
 </p>
 
 **[기능]**
