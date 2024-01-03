@@ -13,7 +13,6 @@ Contact / Gallery / Variety (game)를 한 번에!
 ## 팀원
 
 - 김선희 [sunnygeem](https://github.com/sunnygeem)
-
 - 박현우 [siesdart](https://github.com/siesdart)
 
 
