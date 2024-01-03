@@ -88,3 +88,4 @@ __flow__
 
 
 ## .apk link
+해당 repository 내 app-release.apk 참고
