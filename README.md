@@ -78,14 +78,4 @@ __flow__
     - 상단 바를 통해 레벨과 레벨 내 현재 풀고 있는 문제 번호를 볼 수 있습니다.
     - ‘How to play’ 버튼을 눌러 게임 설명을 볼 수 있습니다.
     - ‘Enter your answer…’ 라는 hint 메시지가 적힌 text box 에 답을 입력할 수 있습니다.
-        - 이용자가 입력한 답에 대한 팝업 메시지는 다음과 같습니다.
-            ![game popup](https://github.com/siesdart/madcamp-week1/assets/91830035/ad8940ba-c435-4830-8c38-49592ff89cbd)
-    - 레벨 3까지 모두 완료하거나, ‘Exit’ 버튼을 눌러 게임 결과 화면으로 이동할 수 있습니다.
-        ![game result](https://github.com/siesdart/madcamp-week1/assets/91830035/b1f51d65-d230-49fc-b6be-047dbd85ed36)
-        - 결과 화면에서는 (맞힌 문제 / 전체 문제) 비율, (문제 번호, 문제, 정답 여부, 이용자 입력 답, 실제 답) 바를 볼 수 있습니다.
-        - 결과 화면에서 ‘Restart’ 버튼을 누르면, 게임을 다시 시작할 수 있습니다.
-
-
-
-## .apk link
-https://drive.google.com/file/d/1IvGS9SsdpL7SNpIw3y8SxPvOcq_iXoVT/view?usp=sharing
+        - 이용자가 입력한 답에 대한 팝업 메시지는 다음과고
