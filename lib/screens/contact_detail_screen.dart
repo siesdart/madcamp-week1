@@ -63,9 +63,7 @@ class ContactDetailScreen extends StatelessWidget {
       shadowColor: Colors.blueGrey.withOpacity(0.7),
       child: IconButton.filled(
         padding: const EdgeInsets.all(12),
-        onPressed: () async {
-          await launchUrl(Uri(scheme: scheme, path: path));
-        },
+        onPressed: () async => launchUrl(Uri(scheme: scheme, path: path)),
         icon: icon,
       ),
     );
@@ -121,7 +119,6 @@ class ContactDetailScreen extends StatelessWidget {
 
   Widget _buildItem(String type, String value) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           type.toUpperCase(),

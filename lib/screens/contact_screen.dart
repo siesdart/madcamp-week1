@@ -17,9 +17,7 @@ class ContactScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(32),
-          ),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -30,41 +28,37 @@ class ContactScreen extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(32),
-          ),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
           child: Consumer(
-            builder: (context, ref, _) {
-              return Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: CustomTextField(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(28),
-                        bottom: Radius.circular(16),
-                      ),
-                      hintText: 'Search...',
-                      onChanged: (text) =>
-                          ref.read(userQueryProvider.notifier).state = text,
+            builder: (context, ref, _) => Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: CustomTextField(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(28),
+                      bottom: Radius.circular(16),
                     ),
+                    hintText: 'Search...',
+                    onChanged: (text) =>
+                        ref.read(userQueryProvider.notifier).state = text,
                   ),
-                  const SizedBox(height: 8),
-                  Expanded(
-                    child: switch (ref.watch(usersProvider)) {
-                      AsyncData(:final value) => ListView.builder(
-                          itemBuilder: (context, index) => ContactTile(
-                            user: value[index],
-                            onPressed: (user) => _onTilePressed(context, user),
-                          ),
-                          itemCount: value.length,
+                ),
+                const SizedBox(height: 8),
+                Expanded(
+                  child: switch (ref.watch(usersProvider)) {
+                    AsyncData(:final value) => ListView.builder(
+                        itemBuilder: (context, index) => ContactTile(
+                          user: value[index],
+                          onPressed: (user) => _onTilePressed(context, user),
                         ),
-                      _ => const Center(child: CircularProgressIndicator()),
-                    },
-                  ),
-                ],
-              );
-            },
+                        itemCount: value.length,
+                      ),
+                    _ => const Center(child: CircularProgressIndicator()),
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

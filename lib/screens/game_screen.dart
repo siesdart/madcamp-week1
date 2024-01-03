@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:madcamp_week1/hooks/f_toast.dart';
+import 'package:madcamp_week1/hooks/fluttertoast.dart';
 import 'package:madcamp_week1/models/game.dart';
 import 'package:madcamp_week1/providers/game.dart';
 import 'package:madcamp_week1/screens/game_result_screen.dart';
@@ -17,6 +17,8 @@ class GameScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final fToast = useFToast();
+    final answerController = useTextEditingController();
     final game = ref.watch(gameNotifierProvider);
 
     if (game.isExited) {
@@ -26,8 +28,6 @@ class GameScreen extends HookConsumerWidget {
       );
     }
 
-    final fToast = useFToast();
-    final answerController = useTextEditingController();
     final problem = game.problem;
 
     return CustomScaffold(
@@ -52,6 +52,7 @@ class GameScreen extends HookConsumerWidget {
                 child: CustomTextField(
                   controller: answerController,
                   hintText: 'Enter your answer...',
+                  keepFocus: true,
                   keyboardType:
                       const TextInputType.numberWithOptions(signed: true),
                   onSubmitted: (str) {
@@ -64,7 +65,6 @@ class GameScreen extends HookConsumerWidget {
                         .read(gameNotifierProvider.notifier)
                         .sendAnswer(userAns);
 
-                    if (result == null) return;
                     if (result) {
                       flutterToast(
                         fToast,
@@ -106,50 +106,48 @@ class GameScreen extends HookConsumerWidget {
   void _showHowToPlaySheet(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
-      builder: (context) {
-        return Container(
-          height: 320,
-          padding: const EdgeInsets.all(24),
-          child: const Center(
-            child: Text.rich(
-              TextSpan(
-                style: TextStyle(fontSize: 13),
-                children: [
-                  TextSpan(
-                    text: 'How to Play\n\n',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
-                    ),
+      builder: (context) => Container(
+        height: 320,
+        padding: const EdgeInsets.all(24),
+        child: const Center(
+          child: Text.rich(
+            TextSpan(
+              style: TextStyle(fontSize: 13),
+              children: [
+                TextSpan(
+                  text: 'How to Play\n\n',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
                   ),
-                  TextSpan(
-                    text: '1. Enter the answer to the given question.\n',
-                  ),
-                  TextSpan(
-                    text:
-                        '2. \n    - If your answer is CORRECT, you\'ll see "Success!"\n',
-                  ),
-                  TextSpan(
-                    text:
-                        '    - your answer is INCORRECT, you\'ll see "Fail.."\n',
-                  ),
-                  TextSpan(
-                    text:
-                        '3. If you get 3 questions correct in current level, you can move on to the next level.\n',
-                  ),
-                  TextSpan(
-                    text:
-                        '    - If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n    - If the current level is 1, you start from the beginning.\n',
-                  ),
-                  TextSpan(
-                    text: '    - There are levels up to 3.',
-                  ),
-                ],
-              ),
+                ),
+                TextSpan(
+                  text: '1. Enter the answer to the given question.\n',
+                ),
+                TextSpan(
+                  text:
+                      '2. \n    - If your answer is CORRECT, you\'ll see "Success!"\n',
+                ),
+                TextSpan(
+                  text:
+                      '    - your answer is INCORRECT, you\'ll see "Fail.."\n',
+                ),
+                TextSpan(
+                  text:
+                      '3. If you get 3 questions correct in current level, you can move on to the next level.\n',
+                ),
+                TextSpan(
+                  text:
+                      '    - If you get even ONE QUESTION WRONG, you will be returned to the previous level.\n    - If the current level is 1, you start from the beginning.\n',
+                ),
+                TextSpan(
+                  text: '    - There are levels up to 3.',
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 

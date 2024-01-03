@@ -1,9 +1,9 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Users\sh052\Downloads\flutter_windows_3.16.0-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\sh052\madcamp-week1"
+export "FLUTTER_ROOT=/opt/homebrew/Caskroom/flutter/3.16.5/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/hyunwoopark/Desktop/madcamp_week1"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
-export "FLUTTER_TARGET=lib\main.dart"
+export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"

@@ -27,38 +27,20 @@ class LevelIndicator extends StatelessWidget {
               color: Colors.white38,
             ),
             child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text(
-                      labels[0],
-                      style: textStyle,
-                      textAlign: TextAlign.center,
+              children: labels
+                  .map(
+                    (label) => Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Text(
+                          label,
+                          style: textStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text(
-                      labels[1],
-                      style: textStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text(
-                      labels[2],
-                      style: textStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
+                  )
+                  .toList(),
             ),
           ),
           AnimatedPositioned(

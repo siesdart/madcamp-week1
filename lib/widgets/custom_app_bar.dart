@@ -8,11 +8,11 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(120),
         ),
-        color: Colors.indigoAccent,
+        color: Theme.of(context).appBarTheme.backgroundColor,
       ),
       child: child,
     );

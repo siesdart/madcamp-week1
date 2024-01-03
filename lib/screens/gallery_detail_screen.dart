@@ -21,11 +21,8 @@ class GalleryDetailScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(32),
-          ),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
           color: Colors.white,
-          //border: Border.all(color: Colors.blueGrey, width: 1),
           boxShadow: [
             BoxShadow(
               color: Colors.blueGrey.withOpacity(0.7),
@@ -72,7 +69,6 @@ class GalleryDetailScreen extends StatelessWidget {
 
   Widget _buildItem(String type, String value) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           type.toUpperCase(),

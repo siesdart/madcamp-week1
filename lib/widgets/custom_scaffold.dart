@@ -15,8 +15,6 @@ class CustomScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Material(
       child: SafeArea(
         child: Stack(
@@ -29,11 +27,11 @@ class CustomScaffold extends StatelessWidget {
               child: CustomAppBar(
                 child: Center(
                   child: DefaultTextStyle(
-                    style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ) ??
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ) ??
                         const TextStyle(
                           color: Colors.white,
                           fontSize: 32,

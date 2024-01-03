@@ -48,7 +48,7 @@ class GameNotifier extends Notifier<Game> {
     );
   }
 
-  bool? sendAnswer(int userAnswer) {
+  bool sendAnswer(int userAnswer) {
     final problem = state.problem;
     final isCorrect = problem.answer == userAnswer;
 

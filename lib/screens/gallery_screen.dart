@@ -56,7 +56,6 @@ class GalleryScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(38),
                     color: Colors.white,
-                    //border: Border.all(color: Colors.blueGrey, width: 1),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.blueGrey.withOpacity(0.7),
@@ -92,7 +91,6 @@ class GalleryScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(38),
                     color: Colors.white,
-                    //border: Border.all(color: Colors.blueGrey, width: 1),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.blueGrey.withOpacity(0.7),
@@ -117,18 +115,16 @@ class GalleryScreen extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(14),
       child: Consumer(
-        builder: (context, ref, _) {
-          return GridView.count(
-            physics: const ScrollPhysics(),
-            shrinkWrap: true,
-            crossAxisCount: 3,
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 4,
-            children: imageBuilder(ref)
-                .map((index) => _buildImageButton(context, ref, index))
-                .toList(),
-          );
-        },
+        builder: (context, ref, _) => GridView.count(
+          physics: const ScrollPhysics(),
+          shrinkWrap: true,
+          crossAxisCount: 3,
+          mainAxisSpacing: 4,
+          crossAxisSpacing: 4,
+          children: imageBuilder(ref)
+              .map((index) => _buildImageButton(context, ref, index))
+              .toList(),
+        ),
       ),
     );
   }

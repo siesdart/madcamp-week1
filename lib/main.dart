@@ -17,20 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Week 1',
       theme: _buildThemeData(),
-      home: FutureBuilder(
-        future: Future.delayed(
-          const Duration(seconds: 3),
-          () => 'Intro Completed',
-        ),
-        builder: (context, snapshot) {
-          return AnimatedSwitcher(
-            duration: const Duration(milliseconds: 1000),
-            switchInCurve: Curves.easeInOut,
-            switchOutCurve: Curves.easeInOut,
-            child: _splashLoadingWidget(snapshot),
-          );
-        },
-      ),
+      home: const MyHomePage(),
     );
   }
 
@@ -48,43 +35,6 @@ class MyApp extends StatelessWidget {
     return base.copyWith(
       textTheme: GoogleFonts.ibmPlexSansKrTextTheme(
         base.textTheme.apply(bodyColor: Colors.black87),
-      ),
-    );
-  }
-
-  Widget _splashLoadingWidget(AsyncSnapshot<String> snapshot) {
-    if (snapshot.hasError) {
-      return const Text('error');
-    }
-    if (snapshot.hasData) {
-      return const MyHomePage();
-    }
-    return const IntroScreen();
-  }
-}
-
-class IntroScreen extends StatelessWidget {
-  const IntroScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage('images/logo.png'),
-              fit: BoxFit.cover,
-            ),
-            Text(
-              'Contact / Gallery / Variety',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15),
-            ),
-          ],
-        ),
       ),
     );
   }

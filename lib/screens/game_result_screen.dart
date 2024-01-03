@@ -34,13 +34,11 @@ class GameResultScreen extends StatelessWidget {
                       curve: Curves.easeInOut,
                       duration: const Duration(seconds: 1),
                       tween: Tween(begin: 0, end: corrects / results.length),
-                      builder: (context, value, _) {
-                        return CircularProgressIndicator(
-                          backgroundColor: Colors.black26,
-                          strokeWidth: 8,
-                          value: value,
-                        );
-                      },
+                      builder: (context, value, _) => CircularProgressIndicator(
+                        backgroundColor: Colors.black26,
+                        strokeWidth: 8,
+                        value: value,
+                      ),
                     ),
                   ),
                   Text(
@@ -54,22 +52,23 @@ class GameResultScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: InteractiveViewer(
-                constrained: false,
-                child: DataTable(
-                  columnSpacing: 16,
-                  headingTextStyle: const TextStyle(fontSize: 12),
-                  dataTextStyle: const TextStyle(fontSize: 12),
-                  columns: const [
-                    DataColumn(label: Text('#')),
-                    DataColumn(label: Text('Question')),
-                    DataColumn(label: Text('Grade')),
-                    DataColumn(label: Text('Your Answer')),
-                    DataColumn(label: Text('Correct Answer')),
-                  ],
-                  rows: results.indexed
-                      .map<DataRow>((e) => _buildDataRow(e.$1, e.$2))
-                      .toList(),
+              child: SingleChildScrollView(
+                child: FittedBox(
+                  child: DataTable(
+                    columnSpacing: 24,
+                    headingTextStyle: const TextStyle(fontSize: 12),
+                    dataTextStyle: const TextStyle(fontSize: 12),
+                    columns: const [
+                      DataColumn(label: Text('#')),
+                      DataColumn(label: Text('Question')),
+                      DataColumn(label: Text('Grade')),
+                      DataColumn(label: Text('Your Answer')),
+                      DataColumn(label: Text('Correct Answer')),
+                    ],
+                    rows: results.indexed
+                        .map<DataRow>((e) => _buildDataRow(e.$1, e.$2))
+                        .toList(),
+                  ),
                 ),
               ),
             ),

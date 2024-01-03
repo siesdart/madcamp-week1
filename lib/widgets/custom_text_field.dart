@@ -5,6 +5,7 @@ class CustomTextField extends StatelessWidget {
   final BorderRadius borderRadius;
   final String? hintText;
   final TextStyle? style;
+  final bool keepFocus;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   final void Function(String)? onSubmitted;
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(32)),
     this.hintText,
     this.style,
+    this.keepFocus = false,
     this.keyboardType,
     this.onChanged,
     this.onSubmitted,
@@ -45,6 +47,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       style: style ?? const TextStyle(fontSize: 18),
       onChanged: onChanged,
+      onEditingComplete: keepFocus ? () {} : null,
       onSubmitted: onSubmitted,
     );
   }
