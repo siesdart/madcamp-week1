@@ -9,20 +9,21 @@ class GalleryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height / 4;
     return Stack(
       children: <Widget>[
-        const Positioned(
+        Positioned(
           top: 0,
           left: 0,
           right: 0,
-          height: 192,
-          child: CustomAppBar(),
+          height: height,
+          child: const CustomAppBar(),
         ),
         Positioned(
           left: 0,
           right: 0,
           bottom: 0,
-          height: 192,
+          height: height,
           child: Transform.flip(
             flipX: true,
             flipY: true,

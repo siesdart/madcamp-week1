@@ -4,17 +4,18 @@ import 'package:madcamp_week1/widgets/custom_app_bar.dart';
 class CustomScaffold extends StatelessWidget {
   final Widget title;
   final Widget body;
-  final double height;
+  final double? height;
 
   const CustomScaffold({
     required this.title,
     required this.body,
-    this.height = 192,
+    this.height,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final height = this.height ?? MediaQuery.of(context).size.height / 4;
     return Material(
       child: SafeArea(
         child: Stack(

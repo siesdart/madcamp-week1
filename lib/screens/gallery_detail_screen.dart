@@ -31,37 +31,40 @@ class GalleryDetailScreen extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(28),
-                child: Image.asset(
-                  'images/$imageName',
-                  fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AspectRatio(
+                aspectRatio: 1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(28),
+                  child: Image.asset(
+                    'images/$imageName',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  _buildItem('Image Name', imageName),
-                  const Divider(height: 32),
-                  ElevatedButton.icon(
-                    onPressed: () => Navigator.pop(context, index),
-                    icon: isLiked
-                        ? const Icon(Icons.thumb_down)
-                        : const Icon(Icons.thumb_up),
-                    label: isLiked ? const Text('Unlike') : const Text('Like'),
-                  ),
-                ],
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    _buildItem('Image Name', imageName),
+                    const Divider(height: 32),
+                    ElevatedButton.icon(
+                      onPressed: () => Navigator.pop(context, index),
+                      icon: isLiked
+                          ? const Icon(Icons.thumb_down)
+                          : const Icon(Icons.thumb_up),
+                      label:
+                          isLiked ? const Text('Unlike') : const Text('Like'),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
