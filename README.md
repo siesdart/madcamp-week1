@@ -71,7 +71,7 @@ __overview__
 ![game overview](https://github.com/siesdart/madcamp-week1/assets/91830035/4fc5b6e6-14bc-4f88-88f5-df4758d6a726)
 __flow__
 <p align="center">
-    <img src="" width="30%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/e5699812-cf6b-4c6f-8259-75bc583fff45" width="30%">
 </p>
 
 - 사칙 연산 게임을 제공합니다.
