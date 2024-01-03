@@ -47,10 +47,10 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 
 ### 🖼️ 갤러리
-**overview**
+**[overview]**
 ![gallery overview](https://github.com/siesdart/madcamp-week1/assets/91830035/70e82132-86e0-46f5-9ff2-7aa3879416c7)
 
-**flow**
+**[flow]**
 <p align="center">
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/a1c16ea6-b513-49c5-88fc-e090da1d79be" width="30%">
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/c0a9cd97-eacc-47fc-834c-4f3ef6e0a1d7" width="30%">
@@ -60,7 +60,7 @@ Contact / Gallery / Variety (game)를 한 번에!
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/02e48d92-f529-4637-99e6-44af31cea4da" width="30%">
 </p>
 
-**[기능능]**
+**[기능]**
 - 전체 이미지와 함께 ‘Like’한 이미지를 따로 볼 수 있습니다.
   - 각 section 안에서 scroll view를 제공합니다.
 - 이미지를 클릭하면 이미지 상세 화면을 볼 수 있습니다.
@@ -70,10 +70,10 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 
 ### 🎮 게임
-**overview**
+**[overview]**
 ![game overview](https://github.com/siesdart/madcamp-week1/assets/91830035/4fc5b6e6-14bc-4f88-88f5-df4758d6a726)
 
-**flow**
+**[flow]**
 <p align="center">
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/e5699812-cf6b-4c6f-8259-75bc583fff45" width="30%">
 </p>
@@ -92,5 +92,5 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 
 
-## apk 파일일
+## apk 파일
 https://github.com/siesdart/madcamp-week1/raw/main/app-release.apk
