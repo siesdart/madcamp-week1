@@ -55,12 +55,10 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 **[flow]**
 <p align="center">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/a1c16ea6-b513-49c5-88fc-e090da1d79be" width="30%">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/c0a9cd97-eacc-47fc-834c-4f3ef6e0a1d7" width="30%">
-</p>
-<p align="center">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/d63a54f1-b16f-49d0-ad68-5807f169c57e" width="30%">
-    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/02e48d92-f529-4637-99e6-44af31cea4da" width="30%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/a1c16ea6-b513-49c5-88fc-e090da1d79be" width="20%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/c0a9cd97-eacc-47fc-834c-4f3ef6e0a1d7" width="20%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/d63a54f1-b16f-49d0-ad68-5807f169c57e" width="20%">
+    <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/02e48d92-f529-4637-99e6-44af31cea4da" width="20%">
 </p>
 
 **[기능]**
