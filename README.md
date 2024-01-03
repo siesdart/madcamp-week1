@@ -13,8 +13,8 @@ Contact / Gallery / Variety (game)를 한 번에!
 ## 👨‍💻 팀원
 |이름|소속|Github|
 |---|---|---|
-|김선희|한양대학교 컴퓨터소프트웨어학부|https://github.com/sunnygeem|
-|박현우|카이스트 전산학부|https://github.com/siesdart|
+|🐰 김선희|한양대학교 컴퓨터소프트웨어학부|https://github.com/sunnygeem|
+|✏️ 박현우|카이스트 전산학부|https://github.com/siesdart|
 
 
 ## 🖥️ 개발 환경
@@ -26,6 +26,7 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 ## 📝 프로젝트 설명
 이 어플은 Tab 단위로 구성되어 있습니다.
+이동하고자 하는 Tab의 아이콘을 누르면, 해당 Tab으로 이동할 수 있습니다.
 ![tab bar](https://github.com/siesdart/madcamp-week1/assets/91830035/4ef75adc-337f-47f7-abaa-8f75d1286802)
 
 
@@ -41,9 +42,10 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 **[기능]**
 - 인터넷에서 가상의 샘플 json을 받아 화면에 연락처 목록을 보여줍니다.
-- 상단의 검색 창을 통해 이름으로 연락처를 검색할 수 있습니다.
-- 목록 클릭 시 연락처 상세 화면으로 이동합니다.
-    - 버튼 클릭 시 전화번호와 이메일에 맞게 각각 전화, 문자, 메일 앱을 자동으로 실행합니다.
+    - scroll view를 제공합니다.
+- 상단의 검색 창을 통해, 이름으로 연락처를 검색할 수 있습니다.
+- 목록 클릭 시, 연락처 상세 화면으로 이동합니다.
+    - 각 버튼 클릭 시, 전화번호와 이메일에 맞게 각각 전화, 문자, 메일 앱을 자동으로 실행합니다.
 
 
 ### 🖼️ 갤러리
@@ -61,12 +63,13 @@ Contact / Gallery / Variety (game)를 한 번에!
 </p>
 
 **[기능]**
-- 전체 이미지와 함께 ‘Like’한 이미지를 따로 볼 수 있습니다.
+- Gallery 메인 화면에서는 모든 이미지와 'Liked'한 이미지를 구분하여 볼 수 있습니다.
   - 각 section 안에서 scroll view를 제공합니다.
 - 이미지를 클릭하면 이미지 상세 화면을 볼 수 있습니다.
   - 이미지 상세 화면은 이미지 이름, 원본 비율의 사진, ‘Like’ 버튼으로 구성되어 있습니다.
   - ‘Like’ 버튼을 누르면, ‘Liked Image’ section에 곧바로 반영되는 것을 볼 수 있습니다.
-  - 이미 ‘Like’한 이미지의 상세 화면에서는 ‘Unlike’ 버튼을 통해 ‘Liked Image’ section에서 해당 이미지를 제거할 수 있습니다.
+  - 이미 ‘Like’한 이미지의 상세 화면에는 'Like' 버튼 대신 ‘Unlike’ 버튼이 있습니다.
+      - 'Unlike' 버튼을 누르면, ‘Liked Image’ section에서 해당 이미지를 제거할 수 있습니다.
 
 
 ### 🎮 게임
@@ -79,15 +82,15 @@ Contact / Gallery / Variety (game)를 한 번에!
 </p>
 
 **[기능]**
-- 사칙 연산 게임을 제공합니다.
-  - 상단 바를 통해 레벨과 레벨 내 현재 풀고 있는 문제 번호를 볼 수 있습니다.
+- 사칙 연산 게임을 play할 수 있습니다.
+  - 상단에 위치한 2개의 bar를 통해, 현재 레벨과 레벨 내 문제 번호를 볼 수 있습니다.
   - ‘How to play’ 버튼을 눌러 게임 설명을 볼 수 있습니다.
-  - ‘Enter your answer…’ 라는 hint 메시지가 적힌 text box 에 답을 입력할 수 있습니다.
+  - ‘Enter your answer…’ 라는 hint 메시지가 적힌 text box에 답을 입력할 수 있습니다.
     - 이용자가 입력한 답에 대한 팝업 메시지는 다음과 같습니다.
       ![game popup](https://github.com/siesdart/madcamp-week1/assets/91830035/ad8940ba-c435-4830-8c38-49592ff89cbd)
   - 레벨 3까지 모두 완료하거나, ‘Exit’ 버튼을 눌러 게임 결과 화면으로 이동할 수 있습니다.
     ![game result](https://github.com/siesdart/madcamp-week1/assets/91830035/b1f51d65-d230-49fc-b6be-047dbd85ed36)
-    - 결과 화면에서는 (맞힌 문제 / 전체 문제) 비율, (문제 번호, 문제, 정답 여부, 이용자 입력 답, 실제 답) 바를 볼 수 있습니다.
+    - 결과 화면에서는 (맞힌 문제 / 전체 문제) 비율, (문제 번호, 문제, 정답 여부, 이용자 입력 답, 실제 답) bar를 볼 수 있습니다.
     - 결과 화면에서 ‘Restart’ 버튼을 누르면, 게임을 다시 시작할 수 있습니다.
 
 
