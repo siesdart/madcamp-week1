@@ -48,7 +48,7 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 ### 🖼️ 갤러리
 **[overview]**
-![gallery overview](https://github.com/siesdart/madcamp-week1/assets/91830035/70e82132-86e0-46f5-9ff2-7aa3879416c7)
+![gallery overview](https://github.com/siesdart/madcamp-week1/assets/91830035/2388c052-9bb5-47c1-81c2-0a2bba01aac3)
 
 **[flow]**
 <p align="center">
