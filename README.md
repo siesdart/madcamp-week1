@@ -10,22 +10,23 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 
 
-## 팀원
+## 1. 팀원
 |이름|소속|Github|
 |---|---|---|
 |🐰 김선희|한양대학교 컴퓨터소프트웨어학부|<a href="https://github.com/sunnygeem" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
-|✏️ 박현우|카이스트 전산학부|<a href="https://github.com/siesdart" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
+|✏️ 박현우|KAIST 전산학부|<a href="https://github.com/siesdart" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
 
 
 
-## 개발 환경
+## 2. 개발 환경
 - Language: Dart
 - Frontend: Flutter
+    - State Management: Riverpod
 - IDE: Android Studio, Visual Studio Code
 
 
 
-## 프로젝트 설명
+## 3. 프로젝트 설명
 이 어플은 Tab 단위로 구성되어 있습니다.
 이동하고자 하는 Tab의 아이콘을 누르면, 해당 Tab으로 이동할 수 있습니다.
 ![tab bar](https://github.com/siesdart/madcamp-week1/assets/91830035/4ef75adc-337f-47f7-abaa-8f75d1286802)
@@ -42,8 +43,7 @@ Contact / Gallery / Variety (game)를 한 번에!
 </p>
 
 **[기능]**
-- 인터넷에서 가상의 샘플 json을 받아 화면에 연락처 목록을 보여줍니다.
-    - scroll view를 제공합니다.
+- 인터넷에서 가상의 샘플 json 데이터를 받아 ListView를 통해 화면에 연락처 목록을 보여줍니다.
 - 상단의 검색 창을 통해, 이름으로 연락처를 검색할 수 있습니다.
 - 목록 클릭 시, 연락처 상세 화면으로 이동합니다.
     - 각 버튼 클릭 시, 전화번호와 이메일에 맞게 각각 전화, 문자, 메일 앱을 자동으로 실행합니다.
@@ -96,5 +96,5 @@ Contact / Gallery / Variety (game)를 한 번에!
 
 
 
-## apk 파일
+## 4. apk 파일
 https://github.com/siesdart/madcamp-week1/raw/main/app-release.apk
