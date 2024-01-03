@@ -23,6 +23,7 @@ dev_dependencies:
   build_runner: ^2.4.7
   custom_lint: ^0.5.7
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.9
   flutter_test:
     sdk: flutter
   freezed: ^2.4.6
@@ -35,6 +36,15 @@ flutter_launcher_icons:
   image_path: 'images/logo.png'
   adaptive_icon_background: '#ffffff'
   adaptive_icon_foreground: 'images/logo.png'
+
+flutter_native_splash:
+  color: '#ffffff'
+  image: images/logo.png
+  android_12:
+    image: images/logo.png
+    icon_background_color: '#ffffff'
+  ios: false
+  web: false
 
 flutter:
   uses-material-design: true
