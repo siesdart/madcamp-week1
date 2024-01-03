@@ -57,6 +57,8 @@ flow
 <p align="center">
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/a1c16ea6-b513-49c5-88fc-e090da1d79be" width="30%">
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/c0a9cd97-eacc-47fc-834c-4f3ef6e0a1d7" width="30%">
+</p>
+<p align="center">
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/d63a54f1-b16f-49d0-ad68-5807f169c57e" width="30%">
     <img src="https://github.com/siesdart/madcamp-week1/assets/91830035/02e48d92-f529-4637-99e6-44af31cea4da" width="30%">
 </p>
@@ -75,7 +77,9 @@ overview
 ![game overview](https://github.com/siesdart/madcamp-week1/assets/91830035/4fc5b6e6-14bc-4f88-88f5-df4758d6a726)
 
 flow
-![flow: play game](https://github.com/siesdart/madcamp-week1/assets/91830035/e5699812-cf6b-4c6f-8259-75bc583fff45)
+<p align="center">
+    <img src="" width="30%">
+</p>
 
 
 - 사칙 연산 게임을 제공합니다.
