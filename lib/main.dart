@@ -6,7 +6,6 @@ import 'package:madcamp_week1/screens/gallery_screen.dart';
 import 'package:madcamp_week1/screens/game_screen.dart';
 
 Future<void> main() async {
-  await Future<void>.delayed(const Duration(seconds: 1));
   runApp(const ProviderScope(child: MyApp()));
 }
 

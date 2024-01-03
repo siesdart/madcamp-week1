@@ -23,7 +23,7 @@ class GameResultScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 48),
+              padding: const EdgeInsets.symmetric(vertical: 32),
               child: Stack(
                 alignment: Alignment.center,
                 children: [

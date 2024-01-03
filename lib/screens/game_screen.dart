@@ -32,72 +32,82 @@ class GameScreen extends HookConsumerWidget {
 
     return CustomScaffold(
       title: _buildTitle(game),
+      height: 192,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ElevatedButton.icon(
             onPressed: () => _showHowToPlaySheet(context),
             icon: const Icon(Icons.question_mark),
             label: const Text('How to play'),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${problem.operand1} ${problem.operator} ${problem.operand2} = ',
-                style: const TextStyle(fontSize: 22),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${problem.operand1} ${problem.operator} ${problem.operand2} = ',
+                        style: const TextStyle(fontSize: 22),
+                      ),
+                      SizedBox(
+                        width: 200,
+                        child: CustomTextField(
+                          controller: answerController,
+                          hintText: 'Enter your answer...',
+                          keepFocus: true,
+                          keyboardType:
+                              const TextInputType.numberWithOptions(signed: true),
+                          onSubmitted: (str) {
+                            final userAns = int.tryParse(str);
+                            if (userAns == null) return;
+
+                            answerController.clear();
+
+                            final result = ref
+                                .read(gameNotifierProvider.notifier)
+                                .sendAnswer(userAns);
+
+                            if (result) {
+                              flutterToast(
+                                fToast,
+                                'Good Job!',
+                                'images/game_success.png',
+                              );
+                            } else {
+                              flutterToast(
+                                fToast,
+                                'Wrong Answer..',
+                                'images/game_fail.png',
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton.icon(
+                    onPressed: game.results.isEmpty
+                        ? null
+                        : () => ref.read(gameNotifierProvider.notifier).exit(),
+                    icon: const Icon(Icons.exit_to_app),
+                    label: const Text('Exit'),
+                  ),
+                  const SizedBox(height: 32),
+                  Image.asset(
+                    'images/game_bg.png',
+                    width: 64,
+                    height: 64,
+                    color: Colors.white38,
+                    colorBlendMode: BlendMode.modulate,
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 200,
-                child: CustomTextField(
-                  controller: answerController,
-                  hintText: 'Enter your answer...',
-                  keepFocus: true,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(signed: true),
-                  onSubmitted: (str) {
-                    final userAns = int.tryParse(str);
-                    if (userAns == null) return;
-
-                    answerController.clear();
-
-                    final result = ref
-                        .read(gameNotifierProvider.notifier)
-                        .sendAnswer(userAns);
-
-                    if (result) {
-                      flutterToast(
-                        fToast,
-                        'Good Job!',
-                        'images/game_success.png',
-                      );
-                    } else {
-                      flutterToast(
-                        fToast,
-                        'Wrong Answer..',
-                        'images/game_fail.png',
-                      );
-                    }
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
-          ElevatedButton.icon(
-            onPressed: game.results.isEmpty
-                ? null
-                : () => ref.read(gameNotifierProvider.notifier).exit(),
-            icon: const Icon(Icons.exit_to_app),
-            label: const Text('Exit'),
-          ),
-          Image.asset(
-            'images/game_bg.png',
-            width: 64,
-            height: 64,
-            color: Colors.white38,
-            colorBlendMode: BlendMode.modulate,
-          ),
-          const SizedBox(height: 8),
         ],
       ),
     );
