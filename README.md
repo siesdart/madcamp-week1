@@ -13,8 +13,9 @@ Contact / Gallery / Variety (game)를 한 번에!
 ## 👨‍💻 팀원
 |이름|소속|Github|
 |---|---|---|
-|🐰 김선희|한양대학교 컴퓨터소프트웨어학부|https://github.com/sunnygeem|
-|✏️ 박현우|카이스트 전산학부|https://github.com/siesdart|
+|🐰 김선희|한양대학교 컴퓨터소프트웨어학부|<a href="https://github.com/sunnygeem" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
+|✏️ 박현우|카이스트 전산학부|<a href="https://github.com/siesdart" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
+
 
 
 ## 🖥️ 개발 환경
